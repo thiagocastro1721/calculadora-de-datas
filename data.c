@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 int main ()
 {
@@ -31,7 +32,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 {
     signed long meses_a_calcular, anos_a_calcular;
     //variaveis criada para o calculo parcial da diferenca em dias na opcao 2.
-    signed long op2_mes_final, op2_ano_final, guarda_dias_calcular;
+    signed long op2_mes_final, op2_ano_final, op3_mes_final,op3_ano_final, guarda_dias_calcular;
     //signed long cont_anos, cont_meses, opcao_resto, dias_remanescentes, cont_semanas, cont_dias;
     //signed long dia_inicial_r, dia_final_r, mes_inicial_r, mes_final_r, ano_inicial_r, ano_final_r, dias_a_calcular_r, opcao_r;
     //signed long opcao_bissexta, quant_anos_bissextos;
@@ -199,8 +200,39 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("Digite a data no formato dd/mm/aaaa exemplo 21/05/1989.\n\n");
         printf("Digite a data.\n");
         scanf("%lu/%lu/%lu", &*pdia_final, &*pmes_final, &*pano_final);
-        printf("Digite os dias que serao subtraidos.\n");
+        printf("Digite os ANOS que serao subtraidos.Em seguida digite os MESES.\n");
+        scanf("%lu", &anos_a_calcular);
+        printf("Digite os MESES que serao subtraidos.Em seguida digite os DIAS.\n");
+        scanf("%lu", &meses_a_calcular);
+        printf("Digite os DIAS que serao subtraidos.\n");
         scanf("%lu", &*pdias_a_calcular);
+
+        if(meses_a_calcular != 0 || anos_a_calcular != 0)
+        {
+            op3_ano_final = *pano_final - anos_a_calcular;
+
+            //A cada 12 meses subtrai 1 ano.
+            op3_ano_final = op3_ano_final - (meses_a_calcular / 12);
+
+
+            //Descontando os anos temos somente os meses, que somados dah mesnos que 12. No maximo 11.
+            meses_a_calcular = meses_a_calcular % 12;
+
+            //O modulo desta subtracao nos dah o mes correto.
+            op3_mes_final = fabs(*pmes_final - meses_a_calcular);
+
+            //Caso o resuldado seja 0, entao o op2_mes_final assume o valor 12.
+            if(op3_mes_final == 0)
+            {
+                op3_mes_final = 12;
+                op3_ano_final = op3_ano_final - 1;
+            }
+
+            *pano_final = op3_ano_final;
+            *pmes_final = op3_mes_final;
+        }
+
+        //Ja podemos dar seguencia ao calculo da subtracao dos dias.
         *pdia_inicial = 1;
         *pmes_inicial = 1;
         *pano_inicial = 1;
@@ -417,7 +449,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 
 int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao)
 {
-    signed long i, j, dias_do_mes, mes_do_ano, dia_da_semana = 0, opcaozero = 0;
+    signed long i, j, dias_do_mes, dias_do_mes_anterior, mes_do_ano, dia_da_semana = 0, opcaozero = 0;
     signed long ano, mes, primeiro_dia_do_mes, cont_dias = 0, k;
     signed long maiores_dias, menores_dias, x_dias;
     signed long quant_anos = 0, guarda_dia_inicial, guarda_mes_inicial, quant_meses = 0, quant_dias = 0, quant_anos_bissextos = 0, quant_semanas = 0;
@@ -465,6 +497,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
             {
 
                 dias_do_mes = 31;
+                dias_do_mes_anterior = 31;
                  /*Condicao para nao ir para o proximo mes.*/
                 if (j == *pmes_final && i == *pano_final)
                 {
@@ -494,6 +527,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                     if ((i % 4 == 0) && (i % 100 != 0) || (i % 400 == 0))
                     {
                         dias_do_mes = 29;
+                        dias_do_mes_anterior = 31;
                         quant_anos_bissextos++;
                         if (*popcao == 6)
                         {
@@ -503,6 +537,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                     else
                     {
                         dias_do_mes = 28;
+                        dias_do_mes_anterior = 31;
                     }
 
                     /*Condicao para nao ir para o proximo mes.*/
@@ -531,6 +566,16 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                     {
 
                         dias_do_mes = 31;
+
+                        if ((i % 4 == 0) && (i % 100 != 0) || (i % 400 == 0))
+                        {
+                            dias_do_mes_anterior = 29;
+                        }
+                        else
+                        {
+                            dias_do_mes_anterior = 28;
+                        }
+
                         /*Condicao para nao ir para o proximo mes.*/
                         if (j == *pmes_final && i == *pano_final)
                         {
@@ -557,6 +602,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                         {
 
                             dias_do_mes = 30;
+                            dias_do_mes_anterior = 31;
+
                              /*Condicao para nao ir para o proximo mes.*/
                             if (j == *pmes_final && i == *pano_final)
                             {
@@ -590,6 +637,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                             {
 
                                 dias_do_mes = 31;
+                                dias_do_mes_anterior = 30;
+
                                  /*Condicao para nao ir para o proximo mes.*/
                                 if (j == *pmes_final && i == *pano_final)
                                 {
@@ -623,6 +672,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                                 {
 
                                     dias_do_mes = 30;
+                                    dias_do_mes_anterior = 31;
+
                                      /*Condicao para nao ir para o proximo mes.*/
                                     if (j == *pmes_final && i == *pano_final)
                                     {
@@ -656,6 +707,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                                     {
 
                                         dias_do_mes = 31;
+                                        dias_do_mes_anterior = 30;
+
                                          /*Condicao para nao ir para o proximo mes.*/
                                         if (j == *pmes_final && i == *pano_final)
                                         {
@@ -689,6 +742,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                                         {
 
                                             dias_do_mes = 31;
+                                            dias_do_mes_anterior = 31;
+
                                              /*Condicao para nao ir para o proximo mes.*/
                                             if (j == *pmes_final && i == *pano_final)
                                             {
@@ -715,6 +770,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                                             {
 
                                                 dias_do_mes = 30;
+                                                dias_do_mes_anterior = 31;
+
                                                  /*Condicao para nao ir para o proximo mes.*/
                                                 if (j == *pmes_final && i == *pano_final)
                                                 {
@@ -741,6 +798,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                                                 {
 
                                                     dias_do_mes = 31;
+                                                    dias_do_mes_anterior = 30;
+
                                                      /*Condicao para nao ir para o proximo mes.*/
                                                     if (j == *pmes_final && i == *pano_final)
                                                     {
@@ -767,6 +826,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                                                     {
 
                                                         dias_do_mes = 30;
+                                                        dias_do_mes_anterior = 31;
+
                                                          /*Condicao para nao ir para o proximo mes.*/
                                                         if (j == *pmes_final && i == *pano_final)
                                                         {
@@ -793,6 +854,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                                                         {
 
                                                             dias_do_mes = 31;
+                                                            dias_do_mes_anterior = 30;
+
                                                              /*Condicao para nao ir para o proximo mes.*/
                                                             if (j == *pmes_final && i == *pano_final)
                                                             {
@@ -858,7 +921,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                     *pmes_final = j;
                     *pano_final = i;
 
-                    k = dias_do_mes + 1;
+                    k = dias_do_mes + 2;
                     j = 13;
                     i = *pano_final + 1;
 
@@ -1085,6 +1148,23 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
             printf("\nDomingo ");
         }
 
+        //correcao do bug da opcao 3 entrada: 01/12/2020 menos 1 dia. Saida: 00/12/2020.
+        if(*pdia_final == 0)
+        {
+            if(*pdia_final == 0 && *pmes_final == 1)
+            {
+                *pdia_final = dias_do_mes_anterior;
+                *pmes_final = 12;
+                *pano_final = *pano_final - 1;
+            }
+            else
+            {
+                *pdia_final = dias_do_mes_anterior;
+                *pmes_final = *pmes_final - 1;
+
+            }
+        }
+
         printf(" %02lu/%02lu/%lu\n" ,*pdia_final, *pmes_final, *pano_final);
         printf("*******************************************************************************\n");
 
@@ -1124,6 +1204,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         ano_inicial_sub = 1;
         dias_a_calcular_sub = *pdias_a_calcular;
         opcao_sub = 2;
+
+        printf("\nOP3 valores da funcao calculadora_de_datas, %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu, \n", dia_inicial_sub, mes_inicial_sub, ano_inicial_sub, dia_final_sub, mes_final_sub, ano_final_sub, x_dias, opcao_sub);
 
         calculadora_de_datas(&dia_inicial_sub, &mes_inicial_sub, &ano_inicial_sub, &dia_final_sub, &mes_final_sub, &ano_final_sub, &x_dias, &opcao_sub);
 
