@@ -146,18 +146,17 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
                 }
                 else
                 {
-                    printf("\nlinha 148 ELSE. op2_ano_final = %lu\n", op2_ano_final);
+                    printf("\nlinha 148 ELSE.\n");
                     op2_ano_final = op2_ano_final + 1;
                     op2_mes_final = op2_mes_final % 12;
                     if(op2_mes_final == 0)
                     {
                         op2_mes_final = 12;
                     }
-                    op2_ano_final = op2_ano_final + (op2_mes_final / 12);
-                    printf("\nlinha 157 ELSE. op2_ano_final = %lu\n", op2_ano_final);
+                    op2_ano_final = op2_ano_final + (meses_a_calcular / 12);
                 }
             }
-             printf("\nlinha 159 valores antes do calculo dos meses e anos %02lu/%02lu/%lu\n" ,*pdia_final, *pmes_final, *pano_final);
+             printf("\nlinha 159 valores antes do calculo dos meses e anos %02lu/%02lu/%lu\n" ,*pdia_inicial, *pmes_inicial, *pano_inicial);
 
             *pdia_final = *pdia_inicial;
             *pmes_final = op2_mes_final;
