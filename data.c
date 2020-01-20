@@ -218,8 +218,17 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             //Descontando os anos temos somente os meses, que somados dah mesnos que 12. No maximo 11.
             meses_a_calcular = meses_a_calcular % 12;
 
+            op3_mes_final = *pmes_final - meses_a_calcular;
+
+            //Se op3_mes_final for negativo, entao subtrai 1 de op3_ano_final.
+            if(op3_mes_final < 0)
+            {
+                op3_ano_final = op3_ano_final - 1;
+            }
+
+
             //O modulo desta subtracao nos dah o mes correto.
-            op3_mes_final = fabs(*pmes_final - meses_a_calcular);
+            op3_mes_final = fabs(op3_mes_final);
 
             //Caso o resuldado seja 0, entao o op2_mes_final assume o valor 12.
             if(op3_mes_final == 0)
