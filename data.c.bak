@@ -207,6 +207,8 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("Digite os DIAS que serao subtraidos.\n");
         scanf("%lu", &*pdias_a_calcular);
 
+        printf("\n linha 210 valores da funcao validar_datas, %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu.\n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
+
         if(meses_a_calcular != 0 || anos_a_calcular != 0)
         {
             op3_ano_final = *pano_final - anos_a_calcular;
@@ -220,7 +222,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 
             op3_mes_final = *pmes_final - meses_a_calcular;
 
-            //Se 
+            //Se op3_mes_final for negativo, entao subtrai 1 de op3_ano_final.
             if(op3_mes_final < 0)
             {
                 op3_ano_final = op3_ano_final - 1;
@@ -330,6 +332,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 
  void validar_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao)
  {
+     printf("\n linha  valores da funcao validar_datas, %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu.\n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
      int erro = 0, *cont = 0;
     /*declarando a funcao calculadora_de_datas*/
     int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao);
@@ -441,7 +444,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 
 
             //*pdia_inicial = 1;
-            printf("\nvalores da funcao validar_datas, %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu.\n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
+            printf("\n linha 444 valores da funcao validar_datas, %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu.\n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
             calculadora_de_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
             //printf("\nA funcao calculadora_de_datas foi chamada.\n");
 
@@ -1227,7 +1230,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         *pano_inicial = 1;
         *pdias_a_calcular = 0;
         *popcao = 2;
-        //printf("\nvalores da funcao calculadora_de_datas, else if (*popcao == 4)...%lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
+        printf("\nvalores da funcao calculadora_de_datas, else if (*popcao == 4)...%lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
         calculadora_de_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
 
         return 0;
