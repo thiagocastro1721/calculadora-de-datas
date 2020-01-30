@@ -272,10 +272,6 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         *pdia_final = 31;
         *pmes_final = 12;
 
-        printf("\nOs anos bissextos entre %lu e %lu sao:\n\n", *pano_inicial, *pano_final);
-
-        printf("*******************************************************************************\n");
-
         validar_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
 
         while(*pano_inicial >= *pano_final)
@@ -401,7 +397,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 
 int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao)
 {
-    signed long i, j, dias_do_mes, dias_do_mes_anterior, mes_do_ano, dia_da_semana = 0, opcaozero = 0;
+    signed long i, j, dias_do_mes, dias_do_mes_anterior, mes_do_ano, dia_da_semana = 0, opcaozero = 0, prints = 0;
     signed long ano, mes, primeiro_dia_do_mes, cont_dias = 0, k;
     signed long maiores_dias, menores_dias, x_dias;
     signed long quant_anos = 0, guarda_dia_inicial, guarda_mes_inicial, quant_meses = 0, quant_dias = 0, quant_anos_bissextos = 0, quant_semanas = 0;
@@ -481,10 +477,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                         dias_do_mes = 29;
                         dias_do_mes_anterior = 31;
                         quant_anos_bissextos++;
-                        if (*popcao == 6)
-                        {
-                            printf("%lu\n", i);
-                        }
                     }
                     else
                     {
@@ -1226,9 +1218,21 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
     }
     else if (*popcao == 6)
     {
-       //As verificacoes de anos bissextos esta dentro do mes de fevereiro entre as linhas 538 a  552.
+        printf("*******************************************************************************\n");
 
-       printf("*******************************************************************************\n");
+        printf("\nOs anos bissextos entre %lu e %lu sao:\n\n", *pano_inicial, *pano_final);
+
+        ano = *pano_inicial;
+
+        for(i = ano; i <= *pano_final; i++)
+        {
+            if ((i % 4 == 0) && (i % 100 != 0) || (i % 400 == 0))
+            {
+                printf("%lu\n", i);
+            }
+        }
+
+        printf("*******************************************************************************\n");
 
         return 0;
     }
