@@ -939,6 +939,9 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //dia_inicial_d = 21
         //mes_inicial_d = 01
         //ano_inicial_d = 2020
+
+        //sabemos agora que 21/05/2019 + 8 meses = 21/01/2020
+
         //agora e soh chamar a funcao calculadora_de_datas
         //para calcular a diferenca em dias entre as seguintes datas
         //21/01/2020 e 30/01/2020
@@ -948,6 +951,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
 
         //concluimos o calculo dos dias remanescentes
         //por enquanto sabemos que os dias remanescentes sao 9
+        //quant_dias = 9
 
 
         //SEMANAS
@@ -968,6 +972,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //por enquanto sabemos que o numero de dias eh 2
 
         //IMPRIMINDO RESULTADOS
+        //30 Anos 8 Meses 1 Semana 2 Dias
+        //Diferenca em dias = 11211
 
         printf("\n");
         printf("*******************************************************************************\n");
