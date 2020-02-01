@@ -1,4 +1,4 @@
-#include <stdio.h>
+ #include <stdio.h>
 
 int main ()
 {
@@ -272,8 +272,6 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         *pdia_final = 31;
         *pmes_final = 12;
 
-        printf("\nOs anos bissextos entre %lu e %lu sao:\n\n", *pano_inicial, *pano_final);
-
         validar_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
 
         while(*pano_inicial >= *pano_final)
@@ -427,12 +425,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
 
     for(i = ano; i <= *pano_final; i++)
     {
-        if(i > *pano_inicial)
-        {
-            quant_anos++;
-        }
-
-
         if(i != *pano_final)
         {
             mes = 12;
@@ -839,20 +831,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
 
             for(k = primeiro_dia_do_mes; k < dias_do_mes; k++)
             {
-                if((k == guarda_dia_inicial))//tera que ser feito pelo menos um decremento, pq k ja inicia com o valor de *pdia_inicial.
-                {
-                    quant_meses++;
-                }
-
-                if(k <= *pdia_final)
-                {
-                    quant_dias++;
-                    if(quant_dias % 7 == 0)
-                    {
-                        quant_semanas++;
-                    }
-                }
-
                 if (*popcao == 2 && (*pdias_a_calcular == cont_dias))
                 {
                     *pdia_final = k;
@@ -879,61 +857,117 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
     }
     else if (*popcao == 1)
     {
-        quant_anos = quant_anos - 1;
+        //ANOS
 
-        quant_meses = (quant_meses - (quant_anos * 12));
+        //calculo da diferenca entre duas datas
+        //exemplo: data inicial 21/05/1989 e data final 30/01/2020
+
+        //calculo dos anos de diferenca
+        quant_anos = *pano_final - *pano_inicial;
+        //quant_anos = 2020 - 1989 = 31
+
+        if(*pmes_final < guarda_mes_inicial)
+        {
+            quant_anos = quant_anos - 1;
+            //quant_anos = 31 - 1 = 30
+        }
+        else if(*pmes_final == guarda_mes_inicial)
+        {
+            if(*pdia_final < guarda_dia_inicial)
+            {
+                quant_anos = quant_anos - 1;
+            }
+        }
+        //concluimos o calculo dos anos
+        //por enquanto sabemos que a diferenca em anos eh 30
+
+
+        //MESES
+
+        //calculo dos meses de diferenca
+        //21/05/1989 + 30 anos = 21/05/2019
+        //agora temos duas datas 21/05/2019 e 30/01/2020
+        //vamos calcular a diferenca entre as duas datas
+        //por enquanto vamos focar na diferenca em meses
+        //lembrando que a diferenca nunca sera maior que 12
+
+        quant_meses = *pmes_final - guarda_mes_inicial;
+
+        //quant_meses = 01 - 05 = -4
+
+        if(quant_meses < 0)
+        {
+            quant_meses = 12 + quant_meses;
+            //quant_meses = 12 + (-4) = 8
+        }
 
         if(*pdia_final < guarda_dia_inicial)
         {
             quant_meses = quant_meses - 1;
         }
+        //concluimos o calculo dos meses
+        //por enquanto sabemos que a diferenca em meses eh 8
 
+        //DIAS REMANESCENTES
+
+        //21/05/1989 e 30/01/2020
+        //21/05/1989 + 30 anos = 21/05/2019
+        //21/05/2019 + 8 meses = ?
+
+        //somando os meses
+
+        //preparando variaveis para chamar a funcao calculadora_de_datas afim de calcular os dias remanescentes
         dia_inicial_d = guarda_dia_inicial;
+        //dia_inicial_d = 21
         mes_inicial_d = guarda_mes_inicial + quant_meses;
+        //mes_inicial_d = 05 + 08 = 13
         ano_inicial_d = *pano_inicial + quant_anos;
-
-        dias_a_calcular_d = 0;
+        //ano_inicial_d = 1989 + 30 = 2019
         opcao_d = 0;
-
-        if(quant_meses >= 12)
-        {
-            quant_meses = quant_meses % 12;
-            quant_anos++;
-        }
-
+        //opcao_d = 0 retorna somente a diferenca em dias
+        dias_a_calcular_d = 0;
+        //para o calculo da diferenca em dias nao e necessario usar esta variavel, entao a mesma tem o seu valor zerado
 
         if(mes_inicial_d > 12)
         {
-            ano_inicial_d = ano_inicial_d + 1;
             mes_inicial_d = mes_inicial_d % 12;
-            if(mes_inicial_d == 0)
-            {
-                mes_inicial_d = 12;
-            }
+            //mes_inicial_d = 01
+            ano_inicial_d = ano_inicial_d + 1;
+            //ano_inicial_d = 2019 + 1 = 2020
         }
+        //temos
+        //dia_inicial_d = 21
+        //mes_inicial_d = 01
+        //ano_inicial_d = 2020
+        //agora e soh chamar a funcao calculadora_de_datas
+        //para calcular a diferenca em dias entre as seguintes datas
+        //21/01/2020 e 30/01/2020
 
-
-        /*troca de posicao caso a primeira data seja maior que a segunda data*/
-         if((ano_inicial_d > *pano_final) || ((ano_inicial_d == *pano_final) && (mes_inicial_d > *pmes_final)) || ((ano_inicial_d == *pano_final) && (mes_inicial_d == *pmes_final) && (dia_inicial_d > *pdia_final)))
-         {
-             temp_dia_inicial = dia_inicial_d;
-             temp_mes_inicial = mes_inicial_d;
-             temp_ano_inicial = ano_inicial_d;
-
-             dia_inicial_d = *pdia_final;
-             mes_inicial_d = *pmes_final;
-             ano_inicial_d = *pano_final;
-
-             *pdia_final = temp_dia_inicial;
-             *pmes_final = temp_mes_inicial;
-             *pano_final = temp_ano_inicial;
-         }
-
+        //OBTENDO DIAS REMANESCENTES
         quant_dias = (calculadora_de_datas(&dia_inicial_d, &mes_inicial_d, &ano_inicial_d, &*pdia_final, &*pmes_final, &*pano_final, &dias_a_calcular_d, &opcao_d));
 
-        quant_semanas = quant_dias / 7;
+        //concluimos o calculo dos dias remanescentes
+        //por enquanto sabemos que os dias remanescentes sao 9
 
+
+        //SEMANAS
+
+        quant_semanas = quant_dias / 7;
+        //quant_semanas = 9 / 7 = 1
+
+        //concluimos o calculo das semanas
+        //por enquanto sabemos que o numero de semanas eh 1
+
+        //DIAS
+
+        //esta eh a quantidade de dias retirando-se as semanas
         quant_dias = quant_dias % 7;
+        //quant_dias = 9 % 7 = 2
+
+        //concluimos o calculo dos dias
+        //por enquanto sabemos que o numero de dias eh 2
+
+        //IMPRIMINDO RESULTADOS
 
         printf("\n");
         printf("*******************************************************************************\n");
@@ -1221,6 +1255,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
     else if (*popcao == 6)
     {
         printf("*******************************************************************************\n");
+
+        printf("\nOs anos bissextos entre %lu e %lu sao:\n\n", *pano_inicial, *pano_final);
 
         ano = *pano_inicial;
 
