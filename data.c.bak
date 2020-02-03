@@ -6,19 +6,16 @@ int main ()
     printf("*******************************************************************************\n");
     printf("\n");
 
-    int cont = 0;
     int repetir = 1;
     signed long dia_inicial = 0, mes_inicial = 0, ano_inicial = 0, dia_final = 0, mes_final = 0, ano_final = 0, dias_a_calcular = 0, opcao = -1;
 
+    /*declarando funcoes*/
+    int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao);
+    void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao);
+    void validar_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao);
 
-        /*declarando funcoes*/
-        int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao);
-        void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao);
-        void validar_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao);
-        void ler_arquivo_gas_txt();
-
-     while(repetir == 1)
-     {
+    while(repetir == 1)
+    {
         //chamando funcoes
         //printf("\nvalores da funcao %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu, \n", dia_inicial, mes_inicial, ano_inicial, dia_final, mes_final, ano_final, dias_a_calcular, opcao);
         captura_e_valida_dados_do_teclado(&dia_inicial, &mes_inicial, &ano_inicial, &dia_final, &mes_final, &ano_final, &dias_a_calcular, &opcao);
@@ -26,7 +23,7 @@ int main ()
         printf("\nDeseja realizar outro calculo? ""1""(sim) ou ""0""(nao).\n");
         scanf("%d", &repetir);
         opcao = -1;
-     }
+    }
 
     return 0;
 }
@@ -36,10 +33,6 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
     signed long meses_a_calcular, anos_a_calcular;
     //variaveis criada para o calculo parcial da diferenca em dias na opcao 2.
     signed long op2_mes_final, op2_ano_final, op3_mes_final,op3_ano_final, guarda_dias_calcular;
-    //signed long cont_anos, cont_meses, opcao_resto, dias_remanescentes, cont_semanas, cont_dias;
-    //signed long dia_inicial_r, dia_final_r, mes_inicial_r, mes_final_r, ano_inicial_r, ano_final_r, dias_a_calcular_r, opcao_r;
-    //signed long opcao_bissexta, quant_anos_bissextos;
-
 
     /*Declarando funcao validar_datas*/
     void validar_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao);
@@ -49,8 +42,6 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 
     /*declarando a funcao calculadora de datas*/
     int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao);
-
-
 
     /*if para pedir a opcao so 1 vez*/
     if(*popcao == -1)
@@ -302,7 +293,8 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 
  void validar_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao)
  {
-        int erro = 0, *cont = 0;
+        int erro = 0;
+
         /*declarando a funcao calculadora_de_datas*/
         int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao);
 
@@ -346,7 +338,6 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
                 printf("\nData invalida. Verifique os dias. Em um ano bissexto fevereiro tem 29 dias.\n\n");
                 erro++;
             }
-
         }
         else
         {
@@ -355,7 +346,6 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
                 printf("\nData invalida. Verifique os dias. Em um ano nao bissexto fevereiro tem 28 dias.\n\n");
                 erro++;
             }
-
         }
 
         //Se o mes for abril, ou junho, ou setembro, ou novembro, entao o mes tera 30 dias. Se nao, tera 31 dias.
@@ -384,7 +374,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             }
         }
 
-        //Se nao houver erro, entao chama a funcao de calculo de dat
+        //Se nao houver erro, entao chama a funcao calculadora_de_datas
         if(erro == 0)
         {
             calculadora_de_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
@@ -398,15 +388,15 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 
 int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao)
 {
-    signed long i, j, dias_do_mes, dias_do_mes_anterior, mes_do_ano, dia_da_semana = 0, opcaozero = 0, prints = 0;
+    signed long i, j, dias_do_mes, dias_do_mes_anterior, dia_da_semana = 0;
     signed long ano, mes, primeiro_dia_do_mes, k;
     double  cont_dias = 0;
     signed long maiores_dias, menores_dias, x_dias;
     signed long quant_anos = 0, guarda_dia_inicial, guarda_mes_inicial, quant_meses = 0, quant_dias = 0, quant_anos_bissextos = 0, quant_semanas = 0;
-    signed long dia_inicial_r, dia_final_r, mes_inicial_r, mes_final_r, ano_inicial_r, ano_final_r, dias_a_calcular_r, opcao_r, temp_dia_r, temp_mes_r;
-    signed long opcao_bissexta, dias_menos_anos;
-    signed long opcao_resto, dias_remanescentes, cont_semanas;
-    signed long a, m, ano_desconto, mes_desconto;
+
+
+
+
     signed long dia_inicial_d, mes_inicial_d, ano_inicial_d, dias_a_calcular_d, opcao_d;// opcao para calcular a quant_dias
 
     //variaveis criadas para o calcula do dia da semana.
@@ -414,7 +404,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
     signed long dia_inicial_s, mes_inicial_s, ano_inicial_s, dia_final_s, mes_final_s, ano_final_s, dias_a_calcular_s, opcaozero_s = 0;
     signed long dia_inicial_sub, mes_inicial_sub, ano_inicial_sub, dia_final_sub, mes_final_sub, ano_final_sub, dias_a_calcular_sub, opcao_sub = 0;
     signed long dia_inicial_md, mes_inicial_md, ano_inicial_md, dia_final_md, mes_final_md, ano_final_md, dias_a_calcular_md, opcao_md;
-    signed long temp_dia_inicial, temp_mes_inicial, temp_ano_inicial, contanobissextos = 0;
+    signed long temp_ano_inicial, contanobissextos = 0;
 
     // primeiro definir uma funcao que calcula void dia_da_semana();
     /*Fazer verificacao de entrada de dados*/
@@ -1025,7 +1015,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         }
         if(cont_dias > 0)
         {
-            printf("\nDiferenca em dias = %lf\n", cont_dias);
+            printf("\nDiferenca em dias = %.0lf\n", cont_dias);
         }
         if(quant_anos == 0 && quant_meses == 0 && quant_semanas == 0 && quant_dias == 0 && cont_dias == 0)
         {
