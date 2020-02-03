@@ -1,5 +1,4 @@
- #include <stdio.h>
-
+#include <stdio.h>
 int main ()
 {
     printf("*******************************************************************************\n");
@@ -56,8 +55,8 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
     /*if para pedir a opcao so 1 vez*/
     if(*popcao == -1)
     {
-        printf("Escolha a operacao que deseja realizar.\n");
-        printf("Digite 1 para calcular a diferenca em dias entre duas datas.\n");
+        printf("Escolha a operacao que deseja realizar.\n\n");
+        printf("Digite 1 para calcular a diferenca entre duas datas.\n");
         printf("Digite 2 para adcionar dias apartir de uma data.\n");
         printf("Digite 3 para subtrair dias apartir de uma data.\n");
         printf("Digite 4 para calcular o dia da semana de uma data.\n");
@@ -70,8 +69,8 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         {
             printf("\n\nOpcao invalida.\n\n");
             printf("\nCalculadora de datas.\n");
-            printf("Escolha a operacao que deseja realizar.\n");
-            printf("Digite 1 para calcular a diferenca em dias entre duas datas.\n");
+            printf("Escolha a operacao que deseja realizar.\n\n");
+            printf("Digite 1 para calcular a diferenca entre duas datas.\n");
             printf("Digite 2 para adcionar dias apartir de uma data.\n");
             printf("Digite 3 para subtrair dias apartir de uma data.\n");
             printf("Digite 4 para calcular o dia da semana de uma data.\n");
@@ -848,7 +847,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
             }
 
             *pdia_inicial = 0;
-
         }
     }
 
@@ -882,7 +880,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         }
         //concluimos o calculo dos anos
         //por enquanto sabemos que a diferenca em anos eh 30
-
 
         //MESES
 
@@ -1061,7 +1058,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         /*
         Na data terca-feira 01/01/0001
         Pegamos o dia da data e fazemos o seguinte calculo:
-        01 % 7 = 1 (resto da divisao entre 21 e 7 eh igual a 1)
+        01 % 7 = 1 (resto da divisao entre 1 e 7 eh igual a 1)
         Entao toda vez que o dia % 7 = 1 sera terca-feira.
         Se dia % 7 = 2 sera quarta-feira.
         Se dia % 7 = 3 sera quinta-feira.
@@ -1180,7 +1177,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         /*
         Na data terca-feira 01/01/0001
         Pegamos o dia da data e fazemos o seguinte calculo:
-        01 % 7 = 1 (resto da divisao entre 21 e 7 eh igual a 1)
+        01 % 7 = 1 (resto da divisao entre 1 e 7 eh igual a 1)
         Entao toda vez que o dia % 7 = 1 sera terca-feira.
         Se dia % 7 = 2 sera quarta-feira.
         Se dia % 7 = 3 sera quinta-feira.
