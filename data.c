@@ -2,6 +2,11 @@
 
 int main ()
 {
+    printf("*******************************************************************************\n");
+    printf("                         CALCULADORA DE DATAS.\n");
+    printf("*******************************************************************************\n");
+    printf("\n");
+
     int cont = 0;
     int repetir = 1;
     signed long dia_inicial = 0, mes_inicial = 0, ano_inicial = 0, dia_final = 0, mes_final = 0, ano_final = 0, dias_a_calcular = 0, opcao = -1;
@@ -51,7 +56,6 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
     /*if para pedir a opcao so 1 vez*/
     if(*popcao == -1)
     {
-        printf("\nCalculadora de datas.\n");
         printf("Escolha a operacao que deseja realizar.\n");
         printf("Digite 1 para calcular a diferenca em dias entre duas datas.\n");
         printf("Digite 2 para adcionar dias apartir de uma data.\n");
@@ -175,7 +179,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
     }
     else if(*popcao == 3)
     {
-        printf("\nsubtrair dias de uma data.\n");
+        printf("\nSubtrair dias de uma data.\n");
         printf("Digite a data no formato dd/mm/aaaa exemplo 21/05/1989.\n\n");
         printf("Digite a data.\n");
         scanf("%lu/%lu/%lu", &*pdia_final, &*pmes_final, &*pano_final);
@@ -274,9 +278,9 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 
         validar_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
 
-        while(*pano_inicial >= *pano_final)
+        while(*pano_inicial > *pano_final)
         {
-            printf("\nErro. Ano inicial maior ou igual ao ano final.\n\n");
+            printf("\nErro. Ano inicial maior que o ano final.\n\n");
             printf("\nDigite o ano inicial no formato aaaa exemplo 1989.\n\n");
             printf("Digite o ano.\n");
             scanf("%lu", &*pano_inicial);
@@ -288,8 +292,6 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             *pmes_inicial = 01;
             *pdia_final = 31;
             *pmes_final = 12;
-
-            printf("\nOs anos bissextos entre %lu e %lu sao:\n\n", *pano_inicial, *pano_final);
 
             validar_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
 
@@ -412,7 +414,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
     signed long dia_inicial_s, mes_inicial_s, ano_inicial_s, dia_final_s, mes_final_s, ano_final_s, dias_a_calcular_s, opcaozero_s = 0;
     signed long dia_inicial_sub, mes_inicial_sub, ano_inicial_sub, dia_final_sub, mes_final_sub, ano_final_sub, dias_a_calcular_sub, opcao_sub = 0;
     signed long dia_inicial_md, mes_inicial_md, ano_inicial_md, dia_final_md, mes_final_md, ano_final_md, dias_a_calcular_md, opcao_md;
-    signed long temp_dia_inicial, temp_mes_inicial, temp_ano_inicial;
+    signed long temp_dia_inicial, temp_mes_inicial, temp_ano_inicial, contanobissextos = 0;
 
     // primeiro definir uma funcao que calcula void dia_da_semana();
     /*Fazer verificacao de entrada de dados*/
@@ -1260,21 +1262,48 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
     }
     else if (*popcao == 6)
     {
-        printf("*******************************************************************************\n");
-
-        printf("\nOs anos bissextos entre %lu e %lu sao:\n\n", *pano_inicial, *pano_final);
-
-        ano = *pano_inicial;
-
-        for(i = ano; i <= *pano_final; i++)
+        if(*pano_final >= *pano_inicial)
         {
-            if ((i % 4 == 0) && (i % 100 != 0) || (i % 400 == 0))
-            {
-                printf("%lu\n", i);
-            }
-        }
+            printf("*******************************************************************************\n");
 
-        printf("*******************************************************************************\n");
+            ano = *pano_inicial;
+
+            //contando os anos bissextos
+            for(i = ano; i <= *pano_final; i++)
+            {
+                if ((i % 4 == 0) && (i % 100 != 0) || (i % 400 == 0))
+                {
+                    contanobissextos++;
+                }
+            }
+
+            if(contanobissextos == 0)
+            {
+                 printf("Nao ha anos bissextos  entre %lu e %lu.\n",*pano_inicial, *pano_final);
+            }
+            else
+            {
+                if(contanobissextos == 1)
+                {
+                    printf("Ha %lu ano bissexto entre %lu e %lu. Veja abaixo:\n\n",contanobissextos, *pano_inicial, *pano_final);
+                }
+                else
+                {
+                    printf("Ha %lu anos bissextos entre %lu e %lu. Veja abaixo:\n\n",contanobissextos, *pano_inicial, *pano_final);
+                }
+
+                //imprimindo os anos bissextos
+                for(i = ano; i <= *pano_final; i++)
+                {
+                    if ((i % 4 == 0) && (i % 100 != 0) || (i % 400 == 0))
+                    {
+                        printf("%lu\n", i);
+                    }
+                }
+            }
+
+            printf("*******************************************************************************\n");
+        }
 
         return 0;
     }
