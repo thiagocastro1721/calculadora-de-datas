@@ -1,5 +1,4 @@
- #include <stdio.h>
-
+#include <stdio.h>
 int main ()
 {
     printf("*******************************************************************************\n");
@@ -400,7 +399,8 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao)
 {
     signed long i, j, dias_do_mes, dias_do_mes_anterior, mes_do_ano, dia_da_semana = 0, opcaozero = 0, prints = 0;
-    signed long ano, mes, primeiro_dia_do_mes, cont_dias = 0, k;
+    signed long ano, mes, primeiro_dia_do_mes, k;
+    double  cont_dias = 0;
     signed long maiores_dias, menores_dias, x_dias;
     signed long quant_anos = 0, guarda_dia_inicial, guarda_mes_inicial, quant_meses = 0, quant_dias = 0, quant_anos_bissextos = 0, quant_semanas = 0;
     signed long dia_inicial_r, dia_final_r, mes_inicial_r, mes_final_r, ano_inicial_r, ano_final_r, dias_a_calcular_r, opcao_r, temp_dia_r, temp_mes_r;
@@ -848,7 +848,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
             }
 
             *pdia_inicial = 0;
-
         }
     }
 
@@ -882,7 +881,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         }
         //concluimos o calculo dos anos
         //por enquanto sabemos que a diferenca em anos eh 30
-
 
         //MESES
 
@@ -1027,7 +1025,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         }
         if(cont_dias > 0)
         {
-            printf("\nDiferenca em dias = %lu\n", cont_dias);
+            printf("\nDiferenca em dias = %lf\n", cont_dias);
         }
         if(quant_anos == 0 && quant_meses == 0 && quant_semanas == 0 && quant_dias == 0 && cont_dias == 0)
         {
@@ -1180,7 +1178,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         /*
         Na data terca-feira 01/01/0001
         Pegamos o dia da data e fazemos o seguinte calculo:
-        01 % 7 = 1 (resto da divisao entre 21 e 7 eh igual a 1)
+        01 % 7 = 1 (resto da divisao entre 1 e 7 eh igual a 1)
         Entao toda vez que o dia % 7 = 1 sera terca-feira.
         Se dia % 7 = 2 sera quarta-feira.
         Se dia % 7 = 3 sera quinta-feira.

@@ -399,7 +399,8 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao)
 {
     signed long i, j, dias_do_mes, dias_do_mes_anterior, mes_do_ano, dia_da_semana = 0, opcaozero = 0, prints = 0;
-    signed long ano, mes, primeiro_dia_do_mes, cont_dias = 0, k;
+    signed long ano, mes, primeiro_dia_do_mes, k;
+    double  cont_dias = 0;
     signed long maiores_dias, menores_dias, x_dias;
     signed long quant_anos = 0, guarda_dia_inicial, guarda_mes_inicial, quant_meses = 0, quant_dias = 0, quant_anos_bissextos = 0, quant_semanas = 0;
     signed long dia_inicial_r, dia_final_r, mes_inicial_r, mes_final_r, ano_inicial_r, ano_final_r, dias_a_calcular_r, opcao_r, temp_dia_r, temp_mes_r;
@@ -1024,7 +1025,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         }
         if(cont_dias > 0)
         {
-            printf("\nDiferenca em dias = %lu\n", cont_dias);
+            printf("\nDiferenca em dias = %.0lf\n", cont_dias);
         }
         if(quant_anos == 0 && quant_meses == 0 && quant_semanas == 0 && quant_dias == 0 && cont_dias == 0)
         {
