@@ -17,7 +17,7 @@ int main ()
     while(repetir == 1)
     {
         //chamando funcoes
-        //printf("\nvalores da funcao %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu, \n", dia_inicial, mes_inicial, ano_inicial, dia_final, mes_final, ano_final, dias_a_calcular, opcao);
+        //printf("\nvalores da funcao %li, %li, %li, %li, %li, %li, %li, %li, \n", dia_inicial, mes_inicial, ano_inicial, dia_final, mes_final, ano_final, dias_a_calcular, opcao);
         captura_e_valida_dados_do_teclado(&dia_inicial, &mes_inicial, &ano_inicial, &dia_final, &mes_final, &ano_final, &dias_a_calcular, &opcao);
 
         printf("\nDeseja realizar outro calculo? ""1""(sim) ou ""0""(nao).\n");
@@ -53,7 +53,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("Digite 4 para calcular o dia da semana de uma data.\n");
         printf("Digite 5 para saber se um ano eh bissexto.\n");
         printf("Digite 6 para saber anos bissextos dentro de um intervalo.\n");
-        scanf("%lu", &*popcao);
+        scanf("%li", &*popcao);
 
         //Validando opcao.
         while((*popcao < 1) || (*popcao > 6))
@@ -67,7 +67,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             printf("Digite 4 para calcular o dia da semana de uma data.\n");
             printf("Digite 5 para saber se um ano eh bissexto.\n");
             printf("Digite 6 para saber anos bissextos dentro de um intervalo.\n");
-            scanf("%lu", &*popcao);
+            scanf("%li", &*popcao);
         }
     }
 
@@ -77,9 +77,9 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
          printf("\nCalcular diferencas entre duas datas.\n");
          printf("Digite as datas no formato dd/mm/aaaa exemplo 21/05/1989.\n\n");
          printf("Digite a data inicial.\n");
-         scanf("%lu/%lu/%lu", &*pdia_inicial, &*pmes_inicial, &*pano_inicial);
+         scanf("%d/%d/%d", &*pdia_inicial, &*pmes_inicial, &*pano_inicial);
          printf("Digite a data final.\n");
-         scanf("%lu/%lu/%lu", &*pdia_final, &*pmes_final, &*pano_final);
+         scanf("%d/%d/%d", &*pdia_final, &*pmes_final, &*pano_final);
 
          /*troca de posicao caso a primeira data seja maior que a segunda data*/
          if((*pano_inicial > *pano_final) || ((*pano_inicial == *pano_final) && (*pmes_inicial > *pmes_final)) || ((*pano_inicial == *pano_final) && (*pmes_inicial == *pmes_final) && (*pdia_inicial > *pdia_final)))
@@ -105,13 +105,13 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nAdicionar dias a uma data especifica.\n");
         printf("Digite a data no formato dd/mm/aaaa exemplo 21/05/1989.\n\n");
         printf("Digite a data inicial.\n");
-        scanf("%lu/%lu/%lu", &*pdia_inicial, &*pmes_inicial, &*pano_inicial);
+        scanf("%d/%d/%d", &*pdia_inicial, &*pmes_inicial, &*pano_inicial);
         printf("Digite os ANOS a serem acrescentados. Em seguida digite os MESES.\n");
-        scanf("%lu", &anos_a_calcular);
+        scanf("%d", &anos_a_calcular);
         printf("Digite os MESES a serem acrescentados.Em seguida digite os DIAS.\n");
-        scanf("%lu", &meses_a_calcular);
+        scanf("%d", &meses_a_calcular);
         printf("Digite os DIAS a serem acrescentados.\n");
-        scanf("%lu", &*pdias_a_calcular);
+        scanf("%d", &*pdias_a_calcular);
 
         guarda_dias_calcular = *pdias_a_calcular;
 
@@ -172,13 +172,13 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nSubtrair dias de uma data.\n");
         printf("Digite a data no formato dd/mm/aaaa exemplo 21/05/1989.\n\n");
         printf("Digite a data.\n");
-        scanf("%lu/%lu/%lu", &*pdia_final, &*pmes_final, &*pano_final);
+        scanf("%d/%d/%d", &*pdia_final, &*pmes_final, &*pano_final);
         printf("Digite os ANOS que serao subtraidos.Em seguida digite os MESES.\n");
-        scanf("%lu", &anos_a_calcular);
+        scanf("%d", &anos_a_calcular);
         printf("Digite os MESES que serao subtraidos.Em seguida digite os DIAS.\n");
-        scanf("%lu", &meses_a_calcular);
+        scanf("%d", &meses_a_calcular);
         printf("Digite os DIAS que serao subtraidos.\n");
-        scanf("%lu", &*pdias_a_calcular);
+        scanf("%d", &*pdias_a_calcular);
 
         if(meses_a_calcular != 0 || anos_a_calcular != 0)
         {
@@ -227,7 +227,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nCalcular o dia da semana de uma data.\n");
         printf("Digite a data no formato dd/mm/aaaa exemplo 21/05/1989.\n\n");
         printf("Digite a data.\n");
-        scanf("%lu/%lu/%lu", &*pdia_final, &*pmes_final, &*pano_final);
+        scanf("%d/%02li/%02li", &*pdia_final, &*pmes_final, &*pano_final);
 
         *pdia_inicial = 1;
         *pmes_inicial = 1;
@@ -242,7 +242,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nSaber se um ano eh bissexto.\n");
         printf("Digite o ano no formato aaaa exemplo 1989.\n\n");
         printf("Digite o ano.\n");
-        scanf("%lu", &*pano_final);
+        scanf("%02li", &*pano_final);
         *pdia_inicial = 01;
         *pmes_inicial = 01;
         *pano_inicial = 01;
@@ -256,10 +256,10 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nSaber anos bissextos dentro de um intervalo.\n");
         printf("Digite o ano inicial no formato aaaa exemplo 1989.\n\n");
         printf("Digite o ano.\n");
-        scanf("%lu", &*pano_inicial);
+        scanf("%02li", &*pano_inicial);
         printf("Digite o ano final no formato aaaa exemplo 1989.\n\n");
         printf("Digite o ano.\n");
-        scanf("%lu", &*pano_final);
+        scanf("%02li", &*pano_final);
 
         *pdia_inicial = 01;
         *pmes_inicial = 01;
@@ -273,10 +273,10 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             printf("\nErro. Ano inicial maior que o ano final.\n\n");
             printf("\nDigite o ano inicial no formato aaaa exemplo 1989.\n\n");
             printf("Digite o ano.\n");
-            scanf("%lu", &*pano_inicial);
+            scanf("%02li", &*pano_inicial);
             printf("Digite o ano final no formato aaaa exemplo 1989.\n\n");
             printf("Digite o ano.\n");
-            scanf("%lu", &*pano_final);
+            scanf("%02li", &*pano_final);
 
             *pdia_inicial = 01;
             *pmes_inicial = 01;
@@ -311,7 +311,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         //Os anos nao podem ser negativos e nem serem maiores que 9999999.
         if((*pano_inicial < 1) || (*pano_inicial > 9999999) || (*pano_final < 1) || (*pano_final > 9999999))
         {
-            //printf("\nvalores da funcao %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
+            //printf("\nvalores da funcao %li, %li, %li, %li, %li, %li, %li, %li, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
             printf("\nData invalida. Verifique os anos.\n\n");
             erro++;
         }
@@ -393,10 +393,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
     double  cont_dias = 0;
     signed long maiores_dias, menores_dias, x_dias;
     signed long quant_anos = 0, guarda_dia_inicial, guarda_mes_inicial, quant_meses = 0, quant_dias = 0, quant_anos_bissextos = 0, quant_semanas = 0;
-
-
-
-
     signed long dia_inicial_d, mes_inicial_d, ano_inicial_d, dias_a_calcular_d, opcao_d;// opcao para calcular a quant_dias
 
     //variaveis criadas para o calcula do dia da semana.
@@ -404,7 +400,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
     signed long dia_inicial_s, mes_inicial_s, ano_inicial_s, dia_final_s, mes_final_s, ano_final_s, dias_a_calcular_s, opcaozero_s = 0;
     signed long dia_inicial_sub, mes_inicial_sub, ano_inicial_sub, dia_final_sub, mes_final_sub, ano_final_sub, dias_a_calcular_sub, opcao_sub = 0;
     signed long dia_inicial_md, mes_inicial_md, ano_inicial_md, dia_final_md, mes_final_md, ano_final_md, dias_a_calcular_md, opcao_md;
-    signed long temp_ano_inicial, contanobissextos = 0;
+    signed long contanobissextos = 0;
 
     // primeiro definir uma funcao que calcula void dia_da_semana();
     /*Fazer verificacao de entrada de dados*/
@@ -882,19 +878,22 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //lembrando que a diferenca nunca sera maior que 12
 
         quant_meses = *pmes_final - guarda_mes_inicial;
-
         //quant_meses = 01 - 05 = -4
+        printf("\nlinha 882 quant_meses = %li, *pmes_final = %li, guarda_mes_inicial = %li\n", quant_meses, *pmes_final, guarda_mes_inicial);
+
+        if(*pdia_final < guarda_dia_inicial)
+        {
+            quant_meses = quant_meses - 1;
+        }
+        printf("\nlinha 888 quant_meses = %li , *pmes_final = %li, guarda_mes_inicial = %li\n", quant_meses, *pmes_final, guarda_mes_inicial);
 
         if(quant_meses < 0)
         {
             quant_meses = 12 + quant_meses;
             //quant_meses = 12 + (-4) = 8
         }
+        printf("\nlinha 895 quant_meses = %li, *pmes_final = %li, guarda_mes_inicial = %li\n", quant_meses, *pmes_final, guarda_mes_inicial);
 
-        if(*pdia_final < guarda_dia_inicial)
-        {
-            quant_meses = quant_meses - 1;
-        }
         //concluimos o calculo dos meses
         //por enquanto sabemos que a diferenca em meses eh 8
 
@@ -972,22 +971,22 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         {
             if(quant_anos == 1)
             {
-                printf("%lu Ano ", quant_anos);
+                printf("%li Ano ", quant_anos);
             }
             else
             {
-                printf("%lu Anos ", quant_anos);
+                printf("%li Anos ", quant_anos);
             }
         }
         if(quant_meses > 0)
         {
             if(quant_meses == 1)
             {
-                printf("%lu Mes ", quant_meses);
+                printf("%li Mes ", quant_meses);
             }
             else
             {
-                printf("%lu Meses ", quant_meses);
+                printf("%li Meses ", quant_meses);
             }
 
         }
@@ -995,22 +994,22 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         {
             if(quant_semanas == 1)
             {
-                printf("%lu Semana ", quant_semanas);
+                printf("%li Semana ", quant_semanas);
             }
             else
             {
-                printf("%lu Semanas ", quant_semanas);
+                printf("%li Semanas ", quant_semanas);
             }
         }
         if(quant_dias > 0)
         {
             if(quant_dias == 1)
             {
-                printf("%lu Dia ", quant_dias);
+                printf("%li Dia ", quant_dias);
             }
             else
             {
-                printf("%lu Dias ", quant_dias);
+                printf("%li Dias ", quant_dias);
             }
         }
         if(cont_dias > 0)
@@ -1107,7 +1106,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
             }
         }
 
-        printf(" %02lu/%02lu/%lu\n" ,*pdia_final, *pmes_final, *pano_final);
+        printf(" %02li/%02li/%li\n" ,*pdia_final, *pmes_final, *pano_final);
         printf("*******************************************************************************\n");
 
         return 0;
@@ -1228,7 +1227,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
             }
         }
 
-        printf(" %02lu/%02lu/%lu\n" ,*pdia_final, *pmes_final, *pano_final);
+        printf(" %02li/%02li/%li\n" ,*pdia_final, *pmes_final, *pano_final);
         printf("*******************************************************************************\n");
 
         return 0;
@@ -1239,11 +1238,11 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //Verificar se o ano eh bissexto.
         if ((*pano_final % 4 == 0) && (*pano_final % 100 != 0) || (*pano_final % 400 == 0))
         {
-            printf("\nSim. O ano %lu eh bissexto.\n", *pano_final);
+            printf("\nSim. O ano %li eh bissexto.\n", *pano_final);
         }
         else
         {
-            printf("\nNao. O ano %lu nao eh bissexto.\n", *pano_final);
+            printf("\nNao. O ano %li nao eh bissexto.\n", *pano_final);
         }
         printf("*******************************************************************************\n");
         return 0;
@@ -1267,17 +1266,17 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
 
             if(contanobissextos == 0)
             {
-                 printf("Nao ha anos bissextos  entre %lu e %lu.\n",*pano_inicial, *pano_final);
+                 printf("Nao ha anos bissextos  entre %li e %li.\n",*pano_inicial, *pano_final);
             }
             else
             {
                 if(contanobissextos == 1)
                 {
-                    printf("Ha %lu ano bissexto entre %lu e %lu. Veja abaixo:\n\n",contanobissextos, *pano_inicial, *pano_final);
+                    printf("Ha %li ano bissexto entre %li e %li. Veja abaixo:\n\n",contanobissextos, *pano_inicial, *pano_final);
                 }
                 else
                 {
-                    printf("Ha %lu anos bissextos entre %lu e %lu. Veja abaixo:\n\n",contanobissextos, *pano_inicial, *pano_final);
+                    printf("Ha %li anos bissextos entre %li e %li. Veja abaixo:\n\n",contanobissextos, *pano_inicial, *pano_final);
                 }
 
                 //imprimindo os anos bissextos
@@ -1285,7 +1284,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                 {
                     if ((i % 4 == 0) && (i % 100 != 0) || (i % 400 == 0))
                     {
-                        printf("%lu\n", i);
+                        printf("%li\n", i);
                     }
                 }
             }
@@ -1295,6 +1294,4 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
 
         return 0;
     }
-
-
 }
