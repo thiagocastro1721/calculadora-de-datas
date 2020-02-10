@@ -330,23 +330,47 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             erro++;
         }
 
-        //Se o ano for bissexto, entao o mes de fevereiro tera 29 dias. Se nao, tera 28 dias.
-        if(((*pmes_inicial == 2) && ((*pano_inicial%4 == 0) && (*pano_inicial%100 != 0) || (*pano_inicial%400 == 0))) || ((*pmes_final == 2) && ((*pano_final%4 == 0) && (*pano_final%100 != 0) || (*pano_final%400 == 0))))
+        //Se o ano inicial for bissexto, entao o mes de fevereiro tera 29 dias. Se nao, tera 28 dias.
+        if((*pano_inicial%4 == 0) && (*pano_inicial%100 != 0) || (*pano_inicial%400 == 0))
         {
-            if((*pdia_inicial > 29) || (*pdia_final > 29))
+            if((*pdia_inicial > 29) && (*pmes_inicial == 2))
             {
+                printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
                 printf("\nData invalida. Verifique os dias. Em um ano bissexto fevereiro tem 29 dias.\n\n");
                 erro++;
             }
         }
         else
         {
-            if(((*pmes_inicial == 2) || (*pmes_final == 2)) && ((*pdia_inicial > 28) || (*pdia_final > 28)))
+            if(((*pdia_inicial > 28) && (*pmes_inicial == 2)) || ((*pdia_final > 28) && (*pmes_final == 2)))
             {
+                printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
                 printf("\nData invalida. Verifique os dias. Em um ano nao bissexto fevereiro tem 28 dias.\n\n");
                 erro++;
             }
         }
+
+        //Se o ano final for bissexto, entao o mes de fevereiro tera 29 dias. Se nao, tera 28 dias.
+        if((*pano_final%4 == 0) && (*pano_final%100 != 0) || (*pano_final%400 == 0))
+        {
+            if(((*pdia_inicial > 29) && (*pmes_inicial == 2)) || ((*pdia_final > 29) && (*pmes_final == 2)))
+            {
+                printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
+                printf("\nData invalida. Verifique os dias. Em um ano bissexto fevereiro tem 29 dias.\n\n");
+                erro++;
+            }
+        }
+        else
+        {
+            if(((*pdia_inicial > 28) && (*pmes_inicial == 2)) || ((*pdia_final > 28) && (*pmes_final == 2)))
+            {
+                printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
+                printf("\nData invalida. Verifique os dias. Em um ano nao bissexto fevereiro tem 28 dias.\n\n");
+                erro++;
+            }
+        }
+
+
 
         //Se o mes for abril, ou junho, ou setembro, ou novembro, entao o mes tera 30 dias. Se nao, tera 31 dias.
         if((*pmes_inicial == 4) || (*pmes_inicial == 6) || (*pmes_inicial == 9) || (*pmes_inicial == 11))
@@ -879,21 +903,17 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
 
         quant_meses = *pmes_final - guarda_mes_inicial;
         //quant_meses = 01 - 05 = -4
-        printf("\nlinha 882 quant_meses = %li, *pmes_final = %li, guarda_mes_inicial = %li\n", quant_meses, *pmes_final, guarda_mes_inicial);
 
         if(*pdia_final < guarda_dia_inicial)
         {
             quant_meses = quant_meses - 1;
         }
-        printf("\nlinha 888 quant_meses = %li , *pmes_final = %li, guarda_mes_inicial = %li\n", quant_meses, *pmes_final, guarda_mes_inicial);
 
         if(quant_meses < 0)
         {
             quant_meses = 12 + quant_meses;
             //quant_meses = 12 + (-4) = 8
         }
-        printf("\nlinha 895 quant_meses = %li, *pmes_final = %li, guarda_mes_inicial = %li\n", quant_meses, *pmes_final, guarda_mes_inicial);
-
         //concluimos o calculo dos meses
         //por enquanto sabemos que a diferenca em meses eh 8
 
