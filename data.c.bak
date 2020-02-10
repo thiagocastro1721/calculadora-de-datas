@@ -53,7 +53,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("Digite 4 para calcular o dia da semana de uma data.\n");
         printf("Digite 5 para saber se um ano eh bissexto.\n");
         printf("Digite 6 para saber anos bissextos dentro de um intervalo.\n");
-        scanf("%li", &*popcao);
+        scanf("%d", &*popcao);
 
         //Validando opcao.
         while((*popcao < 1) || (*popcao > 6))
@@ -67,7 +67,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             printf("Digite 4 para calcular o dia da semana de uma data.\n");
             printf("Digite 5 para saber se um ano eh bissexto.\n");
             printf("Digite 6 para saber anos bissextos dentro de um intervalo.\n");
-            scanf("%li", &*popcao);
+            scanf("%d", &*popcao);
         }
     }
 
@@ -227,7 +227,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nCalcular o dia da semana de uma data.\n");
         printf("Digite a data no formato dd/mm/aaaa exemplo 21/05/1989.\n\n");
         printf("Digite a data.\n");
-        scanf("%d/%02li/%02li", &*pdia_final, &*pmes_final, &*pano_final);
+        scanf("%d/%d/%d", &*pdia_final, &*pmes_final, &*pano_final);
 
         *pdia_inicial = 1;
         *pmes_inicial = 1;
@@ -242,7 +242,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nSaber se um ano eh bissexto.\n");
         printf("Digite o ano no formato aaaa exemplo 1989.\n\n");
         printf("Digite o ano.\n");
-        scanf("%02li", &*pano_final);
+        scanf("%d", &*pano_final);
         *pdia_inicial = 01;
         *pmes_inicial = 01;
         *pano_inicial = 01;
@@ -256,10 +256,10 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nSaber anos bissextos dentro de um intervalo.\n");
         printf("Digite o ano inicial no formato aaaa exemplo 1989.\n\n");
         printf("Digite o ano.\n");
-        scanf("%02li", &*pano_inicial);
+        scanf("%d", &*pano_inicial);
         printf("Digite o ano final no formato aaaa exemplo 1989.\n\n");
         printf("Digite o ano.\n");
-        scanf("%02li", &*pano_final);
+        scanf("%d", &*pano_final);
 
         *pdia_inicial = 01;
         *pmes_inicial = 01;
@@ -273,10 +273,10 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             printf("\nErro. Ano inicial maior que o ano final.\n\n");
             printf("\nDigite o ano inicial no formato aaaa exemplo 1989.\n\n");
             printf("Digite o ano.\n");
-            scanf("%02li", &*pano_inicial);
+            scanf("%d", &*pano_inicial);
             printf("Digite o ano final no formato aaaa exemplo 1989.\n\n");
             printf("Digite o ano.\n");
-            scanf("%02li", &*pano_final);
+            scanf("%d", &*pano_final);
 
             *pdia_inicial = 01;
             *pmes_inicial = 01;

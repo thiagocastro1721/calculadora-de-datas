@@ -879,21 +879,17 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
 
         quant_meses = *pmes_final - guarda_mes_inicial;
         //quant_meses = 01 - 05 = -4
-        printf("\nlinha 882 quant_meses = %li, *pmes_final = %li, guarda_mes_inicial = %li\n", quant_meses, *pmes_final, guarda_mes_inicial);
 
         if(*pdia_final < guarda_dia_inicial)
         {
             quant_meses = quant_meses - 1;
         }
-        printf("\nlinha 888 quant_meses = %li , *pmes_final = %li, guarda_mes_inicial = %li\n", quant_meses, *pmes_final, guarda_mes_inicial);
 
         if(quant_meses < 0)
         {
             quant_meses = 12 + quant_meses;
             //quant_meses = 12 + (-4) = 8
         }
-        printf("\nlinha 895 quant_meses = %li, *pmes_final = %li, guarda_mes_inicial = %li\n", quant_meses, *pmes_final, guarda_mes_inicial);
-
         //concluimos o calculo dos meses
         //por enquanto sabemos que a diferenca em meses eh 8
 
