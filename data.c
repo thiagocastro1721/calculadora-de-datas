@@ -336,7 +336,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             if((*pdia_inicial > 29) && (*pmes_inicial == 2))
             {
                 //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
-                printf("\nData invalida. Verifique os dias. Em um ano bissexto fevereiro tem 29 dias.\n\n");
+                printf("\nData invalida. Verifique os dias. O ano %li eh bissexto, entao fevereiro tem 29 dias.\n\n", *pano_inicial);
                 erro++;
             }
         }
@@ -345,7 +345,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             if((*pdia_inicial > 28) && (*pmes_inicial == 2))
             {
                 //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
-                printf("\nData invalida. Verifique os dias. Em um ano nao bissexto fevereiro tem 28 dias.\n\n");
+                printf("\nData invalida. Verifique os dias. O ano %li nao eh bissexto, entao fevereiro tem 28 dias.\n\n", *pano_inicial);
                 erro++;
             }
         }
@@ -356,7 +356,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             if((*pdia_final > 29) && (*pmes_final == 2))
             {
                 //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
-                printf("\nData invalida. Verifique os dias. Em um ano bissexto fevereiro tem 29 dias.\n\n");
+                printf("\nData invalida. Verifique os dias. O ano %li eh bissexto, entao fevereiro tem 29 dias.\n\n", *pano_final);
                 erro++;
             }
         }
@@ -365,7 +365,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             if((*pdia_final > 28) && (*pmes_final == 2))
             {
                 //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
-                printf("\nData invalida. Verifique os dias. Em um ano nao bissexto fevereiro tem 28 dias.\n\n");
+                printf("\nData invalida. Verifique os dias. O ano %li nao eh bissexto, entao fevereiro tem 28 dias.\n\n", *pano_final);
                 erro++;
             }
         }
