@@ -336,7 +336,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             if((*pdia_inicial > 29) && (*pmes_inicial == 2))
             {
                 //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
-                printf("\nData invalida. Verifique os dias. Em um ano bissexto fevereiro tem 29 dias.\n\n");
+                printf("\nData invalida. Verifique os dias. O ano %li eh bissexto, entao fevereiro tem 29 dias.\n\n", *pano_inicial);
                 erro++;
             }
         }
@@ -345,7 +345,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             if((*pdia_inicial > 28) && (*pmes_inicial == 2))
             {
                 //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
-                printf("\nData invalida. Verifique os dias. Em um ano nao bissexto fevereiro tem 28 dias.\n\n");
+                printf("\nData invalida. Verifique os dias. O ano %li nao eh bissexto, entao fevereiro tem 28 dias.\n\n", *pano_inicial);
                 erro++;
             }
         }
@@ -365,7 +365,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             if((*pdia_final > 28) && (*pmes_final == 2))
             {
                 //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
-                printf("\nData invalida. Verifique os dias. O ano %li naeh bissexto, entao fevereiro tem 28 dias.\n\n", *pano_final);
+                printf("\nData invalida. Verifique os dias. O ano %li nao eh bissexto, entao fevereiro tem 28 dias.\n\n", *pano_final);
                 erro++;
             }
         }
@@ -874,20 +874,34 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //exemplo: data inicial 21/05/1989 e data final 30/01/2020
 
         //calculo dos anos de diferenca
-        quant_anos = *pano_final - *pano_inicial;
-        //quant_anos = 2020 - 1989 = 31
 
         if(*pmes_final < guarda_mes_inicial)
         {
-            quant_anos = quant_anos - 1;
-            //quant_anos = 31 - 1 = 30
+            quant_anos = (*pano_final - *pano_inicial) - 1;
+            //quant_anos = (2020 - 1989) - 1 = 30
         }
         else if(*pmes_final == guarda_mes_inicial)
         {
-            if(*pdia_final < guarda_dia_inicial)
+            if((guarda_dia_inicial == 29 && *pdia_final == 28) && (guarda_mes_inicial == *pmes_final) && (*pmes_final == 2))
             {
-                quant_anos = quant_anos - 1;
+                quant_anos = *pano_final - *pano_inicial;
             }
+            else if(*pdia_final < guarda_dia_inicial)
+            {
+                quant_anos = (*pano_final - *pano_inicial) - 1;
+            }
+            else if(*pdia_final == guarda_dia_inicial)
+            {
+                quant_anos = *pano_final - *pano_inicial;
+            }
+            else if(*pdia_final > guarda_dia_inicial)
+            {
+                quant_anos = *pano_final - *pano_inicial;
+            }
+        }
+        else if (*pmes_final > guarda_mes_inicial)
+        {
+            quant_anos = *pano_final - *pano_inicial;
         }
         //concluimos o calculo dos anos
         //por enquanto sabemos que a diferenca em anos eh 30
@@ -901,12 +915,20 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //por enquanto vamos focar na diferenca em meses
         //lembrando que a diferenca nunca sera maior que 12
 
-        quant_meses = *pmes_final - guarda_mes_inicial;
-        //quant_meses = 01 - 05 = -4
 
-        if(*pdia_final < guarda_dia_inicial)
+
+        if((guarda_dia_inicial == 29 && *pdia_final == 28) && (guarda_mes_inicial == *pmes_final) && (*pmes_final == 2))
         {
-            quant_meses = quant_meses - 1;
+            quant_meses = *pmes_final - guarda_mes_inicial;
+        }
+        else if(*pdia_final < guarda_dia_inicial)
+        {
+            quant_meses = (*pmes_final - guarda_mes_inicial) - 1;
+        }
+        else
+        {
+            quant_meses = *pmes_final - guarda_mes_inicial;
+            //quant_meses = 01 - 05 = -4
         }
 
         if(quant_meses < 0)
@@ -954,6 +976,16 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //agora e soh chamar a funcao calculadora_de_datas
         //para calcular a diferenca em dias entre as seguintes datas
         //21/01/2020 e 30/01/2020
+
+        //Se o ano nao for bissexto e o dia for 29 e o mes for 2, entao o dia muda o seu valor para 28.
+        if((*pano_inicial % 4 != 0) && (*pano_inicial % 100 == 0) && (*pano_inicial % 400 != 0))
+        {
+            if(guarda_dia_inicial == 29 && guarda_mes_inicial == 2)
+            {
+                dia_inicial_d = 28;
+            }
+        }
+
 
         //OBTENDO DIAS REMANESCENTES
         quant_dias = (calculadora_de_datas(&dia_inicial_d, &mes_inicial_d, &ano_inicial_d, &*pdia_final, &*pmes_final, &*pano_final, &dias_a_calcular_d, &opcao_d));
