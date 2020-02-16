@@ -912,6 +912,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //mes_inicial_d = 05 + 08 = 13
         ano_inicial_d = *pano_inicial + quant_anos;
 
+        //verificacao do dia 29/02 antes de somar os meses
         if(guarda_dia_inicial == 29 && guarda_mes_inicial == 2)
         {
             //Se o ano nao for bissexto e o dia for 29 e o mes for 2, entao o dia muda o seu valor para 28.
@@ -920,6 +921,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
                 if(dia_inicial_d == 29 && mes_inicial_d == 2)
                 {
                     dia_inicial_d = 28;
+                    printf("\nentrou na condicao para 28. linha 923.\n");
                 }
             }
             else
@@ -973,8 +975,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //somando os meses
 
         //preparando variaveis para chamar a funcao calculadora_de_datas afim de calcular os dias remanescentes
-        dia_inicial_d = guarda_dia_inicial;
-        //dia_inicial_d = 21
         mes_inicial_d = guarda_mes_inicial + quant_meses;
         //mes_inicial_d = 05 + 08 = 13
         ano_inicial_d = *pano_inicial + quant_anos;

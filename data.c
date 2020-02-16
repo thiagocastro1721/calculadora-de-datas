@@ -1006,10 +1006,8 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
 
 
         //OBTENDO DIAS REMANESCENTES
-        printf("\ndia_inicial_d = %li, mes_inicial_d = %li, ano_inicial_d = %li, quant_dias = %li\n", dia_inicial_d, mes_inicial_d, ano_inicial_d, quant_dias);
         quant_dias = (calculadora_de_datas(&dia_inicial_d, &mes_inicial_d, &ano_inicial_d, &*pdia_final, &*pmes_final, &*pano_final, &dias_a_calcular_d, &opcao_d));
-        printf("\ndia_inicial_d = %li, mes_inicial_d = %li, ano_inicial_d = %li, quant_dias = %li\n", dia_inicial_d, mes_inicial_d, ano_inicial_d, quant_dias);
-        //concluimos o calculo dos dias remanescentes
+
         //por enquanto sabemos que os dias remanescentes sao 9
         //quant_dias = 9
 
