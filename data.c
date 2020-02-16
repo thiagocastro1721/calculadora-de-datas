@@ -906,6 +906,33 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //concluimos o calculo dos anos
         //por enquanto sabemos que a diferenca em anos eh 30
 
+        dia_inicial_d = guarda_dia_inicial;
+        //dia_inicial_d = 21
+        mes_inicial_d = guarda_mes_inicial;
+        //mes_inicial_d = 05 + 08 = 13
+        ano_inicial_d = *pano_inicial + quant_anos;
+
+        //verificacao do dia 29/02 antes de somar os meses
+        if(guarda_dia_inicial == 29 && guarda_mes_inicial == 2)
+        {
+            //Se o ano nao for bissexto e o dia for 29 e o mes for 2, entao o dia muda o seu valor para 28.
+            if((ano_inicial_d % 4 != 0) || (ano_inicial_d % 100 == 0) && (ano_inicial_d % 400 != 0))
+            {
+                if(dia_inicial_d == 29 && mes_inicial_d == 2)
+                {
+                    dia_inicial_d = 28;
+                    printf("\nentrou na condicao para 28. linha 923.\n");
+                }
+            }
+            else
+            {
+                if(dia_inicial_d == 28 && mes_inicial_d == 2)
+                {
+                    dia_inicial_d = 29;
+                }
+            }
+        }
+
         //MESES
 
         //calculo dos meses de diferenca
@@ -948,8 +975,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //somando os meses
 
         //preparando variaveis para chamar a funcao calculadora_de_datas afim de calcular os dias remanescentes
-        dia_inicial_d = guarda_dia_inicial;
-        //dia_inicial_d = 21
         mes_inicial_d = guarda_mes_inicial + quant_meses;
         //mes_inicial_d = 05 + 08 = 13
         ano_inicial_d = *pano_inicial + quant_anos;
@@ -977,19 +1002,13 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //para calcular a diferenca em dias entre as seguintes datas
         //21/01/2020 e 30/01/2020
 
-        //Se o ano nao for bissexto e o dia for 29 e o mes for 2, entao o dia muda o seu valor para 28.
-        if((ano_inicial_d % 4 != 0) || (ano_inicial_d % 100 == 0) && (ano_inicial_d % 400 != 0))
-        {
-            if(guarda_dia_inicial == 29 && guarda_mes_inicial == 2)
-            {
-                dia_inicial_d = 28;
-            }
-        }
+
 
 
         //OBTENDO DIAS REMANESCENTES
+        printf("\ndia_inicial_d = %li, mes_inicial_d = %li, ano_inicial_d = %li, quant_dias = %li\n", dia_inicial_d, mes_inicial_d, ano_inicial_d, quant_dias);
         quant_dias = (calculadora_de_datas(&dia_inicial_d, &mes_inicial_d, &ano_inicial_d, &*pdia_final, &*pmes_final, &*pano_final, &dias_a_calcular_d, &opcao_d));
-
+        printf("\ndia_inicial_d = %li, mes_inicial_d = %li, ano_inicial_d = %li, quant_dias = %li\n", dia_inicial_d, mes_inicial_d, ano_inicial_d, quant_dias);
         //concluimos o calculo dos dias remanescentes
         //por enquanto sabemos que os dias remanescentes sao 9
         //quant_dias = 9
