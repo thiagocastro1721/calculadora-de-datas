@@ -110,8 +110,20 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         scanf("%d/%d/%d", &*pdia_inicial, &*pmes_inicial, &*pano_inicial);
         printf("Digite os ANOS a serem acrescentados. Em seguida digite os MESES.\n");
         scanf("%d", &anos_a_calcular);
+        while(anos_a_calcular < 0)
+        {
+            printf("Erro. ANOS devem ser maiores ou iguais a zero.\n");
+            printf("Digite os ANOS a serem acrescentados.Em seguida digite os DIAS.\n");
+            scanf("%d", &meses_a_calcular);
+        }
         printf("Digite os MESES a serem acrescentados.Em seguida digite os DIAS.\n");
         scanf("%d", &meses_a_calcular);
+        while(meses_a_calcular < 0)
+        {
+            printf("Erro. MESES devem ser maiores ou iguais a zero.\n");
+            printf("Digite os MESES a serem acrescentados.Em seguida digite os DIAS.\n");
+            scanf("%d", &meses_a_calcular);
+        }
         printf("Digite os DIAS a serem acrescentados.\n");
         scanf("%d", &*pdias_a_calcular);
 
@@ -177,8 +189,20 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         scanf("%d/%d/%d", &*pdia_final, &*pmes_final, &*pano_final);
         printf("Digite os ANOS que serao subtraidos.Em seguida digite os MESES.\n");
         scanf("%d", &anos_a_calcular);
+        while(anos_a_calcular < 0)
+        {
+            printf("Erro. ANOS devem ser maiores ou iguais a zero.\n");
+            printf("Digite os ANOS a serem acrescentados.Em seguida digite os DIAS.\n");
+            scanf("%d", &meses_a_calcular);
+        }
         printf("Digite os MESES que serao subtraidos.Em seguida digite os DIAS.\n");
         scanf("%d", &meses_a_calcular);
+        while(meses_a_calcular < 0)
+        {
+            printf("Erro. MESES devem ser maiores ou iguais a zero.\n");
+            printf("Digite os MESES a serem acrescentados.Em seguida digite os DIAS.\n");
+            scanf("%d", &meses_a_calcular);
+        }
         printf("Digite os DIAS que serao subtraidos.\n");
         scanf("%d", &*pdias_a_calcular);
 
@@ -314,16 +338,9 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         /*declarando a funcao capturar dados_do_teclado*/
         void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao);
 
-        if(*popcao > 0 && *popcao < 7)
+        if(*popcao == 1)
         {
-            //Digite apenas numeros inteiros positivos para adicionar ou subtrair dias.
-            if(*pdias_a_calcular < 0)
-            {
-                printf("\nDigite apenas numeros inteiros positivos para adicionar ou subtrair dias.\n\n");
-                erro++;
-            }
-
-            //Os anos nao podem ser negativos e nem serem maiores que 9999999.
+             //Os anos nao podem ser negativos e nem serem maiores que 9999999.
             if((*pano_inicial < 1) || (*pano_inicial > 9999999) || (*pano_final < 1) || (*pano_final > 9999999))
             {
                 //printf("\nvalores da funcao %li, %li, %li, %li, %li, %li, %li, %li, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
@@ -338,7 +355,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
                 erro++;
             }
 
-            //Os dias nao podem ser negativos.
+             //Os dias nao podem ser negativos.
             if((*pdia_inicial < 1) || (*pdia_final < 1))
             {
                 printf("\nData invalida. Verifique os dias.\nOs dias devem ser numeros inteiros maiores que 0.\n\n");
@@ -385,9 +402,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
                 }
             }
 
-
-
-            //Se o mes for abril, ou junho, ou setembro, ou novembro, entao o mes tera 30 dias. Se nao, tera 31 dias.
+             //Se o mes for abril, ou junho, ou setembro, ou novembro, entao o mes tera 30 dias. Se nao, tera 31 dias.
             if((*pmes_inicial == 4) || (*pmes_inicial == 6) || (*pmes_inicial == 9) || (*pmes_inicial == 11))
             {
                 if(*pdia_inicial > 30)
@@ -413,12 +428,264 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
                 }
             }
         }
-        else if(*popcao == 7)
+        else if(*popcao == 2)
         {
-            printf("\nSem verificacao!\n");
+             //Os anos nao podem ser negativos e nem serem maiores que 9999999.
+            if((*pano_inicial < 1) || (*pano_inicial > 9999999))
+            {
+                //printf("\nvalores da funcao %li, %li, %li, %li, %li, %li, %li, %li, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
+                printf("\nData invalida. Verifique os anos.\n\n");
+                erro++;
+            }
+
+            //Os meses nao podem ser negativos e nem maiores que 12.
+            if((*pmes_inicial < 1) || (*pmes_inicial > 12))
+            {
+                printf("\nData invalida. Verifique os meses.\n\n");
+                erro++;
+            }
+
+            //Os dias nao podem ser negativos.
+            if(*pdia_inicial < 1)
+            {
+                printf("\nData invalida. Verifique os dias.\nOs dias devem ser numeros inteiros maiores que 0.\n\n");
+                erro++;
+            }
+
+            //Se o ano inicial for bissexto, entao o mes de fevereiro tera 29 dias. Se nao, tera 28 dias.
+            if((*pano_inicial%4 == 0) && (*pano_inicial%100 != 0) || (*pano_inicial%400 == 0))
+            {
+                if((*pdia_inicial > 29) && (*pmes_inicial == 2))
+                {
+                    //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
+                    printf("\nData invalida. Verifique os dias. O ano %li eh bissexto, entao fevereiro tem 29 dias.\n\n", *pano_inicial);
+                    erro++;
+                }
+            }
+            else
+            {
+                if((*pdia_inicial > 28) && (*pmes_inicial == 2))
+                {
+                    //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
+                    printf("\nData invalida. Verifique os dias. O ano %li nao eh bissexto, entao fevereiro tem 28 dias.\n\n", *pano_inicial);
+                    erro++;
+                }
+            }
+
+
+             //Se o mes for abril, ou junho, ou setembro, ou novembro, entao o mes tera 30 dias. Se nao, tera 31 dias.
+            if((*pmes_inicial == 4) || (*pmes_inicial == 6) || (*pmes_inicial == 9) || (*pmes_inicial == 11))
+            {
+                if(*pdia_inicial > 30)
+                {
+                    printf("\nData invalida. Verifique os dias.\nOs meses de abril, junho, setembro e novembro sao de 30 dias.\n\n\n");
+                    erro++;
+                }
+            }
+            else if((*pmes_final == 4) || (*pmes_final == 6) || (*pmes_final == 9) || (*pmes_final == 11))
+            {
+                if(*pdia_final > 30)
+                {
+                    printf("\nData invalida. Verifique os dias.\nOs meses de abril, junho, setembro e novembro sao de 30 dias.\n\n\n");
+                    erro++;
+                }
+            }
+            else
+            {
+                if((*pdia_inicial > 31) || (*pdia_final > 31))
+                {
+                    printf("\nData invalida. Verifique os dias.\nOs meses de janeiro, marco, maio, julho, agosto, outubro e dezembro\nsao de 31 dias.\n\n\n");
+                    erro++;
+                }
+            }
+
+                        //Digite apenas numeros inteiros positivos para adicionar ou subtrair dias.
+            if(*pdias_a_calcular < 0)
+            {
+                printf("\nDigite apenas numeros inteiros positivos para adicionar ou subtrair dias, meses ou anos.\n\n");
+                erro++;
+            }
+        }
+        else if (*popcao == 3)
+        {
+            //Os anos nao podem ser negativos e nem serem maiores que 9999999.
+            if((*pano_final < 1) || (*pano_final > 9999999))
+            {
+                //printf("\nvalores da funcao %li, %li, %li, %li, %li, %li, %li, %li, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
+                printf("\nData invalida. Verifique os anos.\n\n");
+                erro++;
+            }
+
+            //Os meses nao podem ser negativos e nem maiores que 12.
+            if((*pmes_final < 1) || (*pmes_final > 12))
+            {
+                printf("\nData invalida. Verifique os meses.\n\n");
+                erro++;
+            }
+
+            //Os dias nao podem ser negativos.
+            if(*pdia_final < 1)
+            {
+                printf("\nData invalida. Verifique os dias.\nOs dias devem ser numeros inteiros maiores que 0.\n\n");
+                erro++;
+            }
+
+            //Se o ano inicial for bissexto, entao o mes de fevereiro tera 29 dias. Se nao, tera 28 dias.
+            if((*pano_final%4 == 0) && (*pano_final%100 != 0) || (*pano_final%400 == 0))
+            {
+                if((*pdia_final > 29) && (*pmes_final == 2))
+                {
+                    //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
+                    printf("\nData invalida. Verifique os dias. O ano %li eh bissexto, entao fevereiro tem 29 dias.\n\n", *pano_inicial);
+                    erro++;
+                }
+            }
+            else
+            {
+                if((*pdia_final > 28) && (*pmes_final == 2))
+                {
+                    //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
+                    printf("\nData invalida. Verifique os dias. O ano %li nao eh bissexto, entao fevereiro tem 28 dias.\n\n", *pano_inicial);
+                    erro++;
+                }
+            }
+
+
+            //Se o mes for abril, ou junho, ou setembro, ou novembro, entao o mes tera 30 dias. Se nao, tera 31 dias.
+            if((*pmes_final == 4) || (*pmes_final == 6) || (*pmes_final == 9) || (*pmes_final == 11))
+            {
+                if(*pdia_final > 30)
+                {
+                    printf("\nData invalida. Verifique os dias.\nOs meses de abril, junho, setembro e novembro sao de 30 dias.\n\n\n");
+                    erro++;
+                }
+            }
+            else
+            {
+                if(*pdia_final > 31)
+                {
+                    printf("\nData invalida. Verifique os dias.\nOs meses de janeiro, marco, maio, julho, agosto, outubro e dezembro\nsao de 31 dias.\n\n\n");
+                    erro++;
+                }
+            }
+
+            //Digite apenas numeros inteiros positivos para adicionar ou subtrair dias.
+            if(*pdias_a_calcular < 0)
+            {
+                printf("\nDigite apenas numeros inteiros positivos para adicionar ou subtrair dias, meses ou anos.\n\n");
+                erro++;
+            }
+        }
+        else if (*popcao == 4)
+        {
+            //Os anos nao podem ser negativos e nem serem maiores que 9999999.
+            if((*pano_final < 1) || (*pano_final > 9999999))
+            {
+                //printf("\nvalores da funcao %li, %li, %li, %li, %li, %li, %li, %li, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
+                printf("\nData invalida. Verifique os anos.\n\n");
+                erro++;
+            }
+
+            //Os meses nao podem ser negativos e nem maiores que 12.
+            if((*pmes_final < 1) || (*pmes_final > 12))
+            {
+                printf("\nData invalida. Verifique os meses.\n\n");
+                erro++;
+            }
+
+            //Os dias nao podem ser negativos.
+            if(*pdia_final < 1)
+            {
+                printf("\nData invalida. Verifique os dias.\nOs dias devem ser numeros inteiros maiores que 0.\n\n");
+                erro++;
+            }
+
+            //Se o ano final for bissexto, entao o mes de fevereiro tera 29 dias. Se nao, tera 28 dias.
+            if((*pano_final%4 == 0) && (*pano_final%100 != 0) || (*pano_final%400 == 0))
+            {
+                if((*pdia_final > 29) && (*pmes_final == 2))
+                {
+                    //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
+                    printf("\nData invalida. Verifique os dias. O ano %li eh bissexto, entao fevereiro tem 29 dias.\n\n", *pano_inicial);
+                    erro++;
+                }
+            }
+            else
+            {
+                if((*pdia_final > 28) && (*pmes_final == 2))
+                {
+                    //printf("\n*pdia_inicial = %li, *pdia_final = %li\n",*pdia_inicial, *pdia_final);
+                    printf("\nData invalida. Verifique os dias. O ano %li nao eh bissexto, entao fevereiro tem 28 dias.\n\n", *pano_inicial);
+                    erro++;
+                }
+            }
+
+
+            //Se o mes for abril, ou junho, ou setembro, ou novembro, entao o mes tera 30 dias. Se nao, tera 31 dias.
+            if((*pmes_final == 4) || (*pmes_final == 6) || (*pmes_final == 9) || (*pmes_final == 11))
+            {
+                if(*pdia_final > 30)
+                {
+                    printf("\nData invalida. Verifique os dias.\nOs meses de abril, junho, setembro e novembro sao de 30 dias.\n\n\n");
+                    erro++;
+                }
+            }
+            else
+            {
+                if(*pdia_final > 31)
+                {
+                    printf("\nData invalida. Verifique os dias.\nOs meses de janeiro, marco, maio, julho, agosto, outubro e dezembro\nsao de 31 dias.\n\n\n");
+                    erro++;
+                }
+            }
+        }
+        else if (*popcao == 5)
+        {
+            //Os anos nao podem ser negativos e nem serem maiores que 9999999.
+            if((*pano_final < 1) || (*pano_final > 9999999))
+            {
+                //printf("\nvalores da funcao %li, %li, %li, %li, %li, %li, %li, %li, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
+                printf("\nData invalida. Verifique os anos.\n\n");
+                erro++;
+            }
+        }
+        else if (*popcao == 6)
+        {
+            //Os anos nao podem ser negativos e nem serem maiores que 9999999.
+            if((*pano_inicial < 1) || (*pano_inicial > 9999999))
+            {
+                //printf("\nvalores da funcao %li, %li, %li, %li, %li, %li, %li, %li, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
+                printf("\nData invalida. Verifique os anos.\n\n");
+                erro++;
+            }
+
+            //Os anos nao podem ser negativos e nem serem maiores que 9999999.
+            if((*pano_final < 1) || (*pano_final > 9999999))
+            {
+                //printf("\nvalores da funcao %li, %li, %li, %li, %li, %li, %li, %li, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
+                printf("\nData invalida. Verifique os anos.\n\n");
+                erro++;
+            }
+        }
+        else if (*popcao == 7)
+        {
+             //Os anos nao podem ser negativos e nem serem maiores que 9999999.
+            if((*pano_final < 1) || (*pano_final > 9999999))
+            {
+                //printf("\nvalores da funcao %li, %li, %li, %li, %li, %li, %li, %li, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
+                printf("\nData invalida. Verifique os anos.\n\n");
+                erro++;
+            }
+
+            //Os meses nao podem ser negativos e nem maiores que 12.
+            if((*pmes_final < 1) || (*pmes_final > 12))
+            {
+                printf("\nData invalida. Verifique os meses.\n\n");
+                erro++;
+            }
         }
 
-        //Se nao houver erro, entao chama a funcao calculadora_de_datas
+        //Se nao houver erro, entao chama a funcao calculadora_de_datas. Caso contrario chama novamente a funcao de validacao
         if(erro == 0)
         {
             calculadora_de_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
@@ -1391,11 +1658,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         int ultimo_dia_do_mes;
 
 
-        //for()
-        //{
-
-        //}
-
         //A opcao 4 eh uma copia da opcao 2 com zero dias a calcular.
         dia_final_s = 1;
         mes_final_s = *pmes_final;
@@ -1407,19 +1669,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         opcaozero_s = 0;
 
         dia_da_semana = (calculadora_de_datas(&dia_inicial_s, &mes_inicial_s, &ano_inicial_s, &dia_final_s, &mes_final_s, &ano_final_s, &dias_a_calcular_s, &opcaozero_s) % 7);
-        printf("\ndia da semana == %li\n", dia_da_semana);
-
-        /*
-        Na data terca-feira 01/01/0001
-        Pegamos o dia da data e fazemos o seguinte calculo:
-        01 % 7 = 1 (resto da divisao entre 1 e 7 eh igual a 1)
-        Entao toda vez que o dia % 7 = 1 sera terca-feira.
-        Se dia % 7 = 2 sera quarta-feira.
-        Se dia % 7 = 3 sera quinta-feira.
-        Se dia % 7 = 6 sera domingo.
-        Assim por diante.
-        Isto vale para qualquer data.
-        */
 
         printf("\n");
         printf("*******************************************************************************");
