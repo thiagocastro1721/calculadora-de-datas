@@ -1388,6 +1388,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         int calendario[6][7] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         int linha, coluna;
         int dia_inicial = 1;
+        int ultimo_dia_do_mes;
 
 
         //for()
@@ -1468,6 +1469,26 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
             coluna = 0;
         }
 
+        if(*pmes_final == 2)
+        {
+                if ((*pano_final % 4 == 0) && (*pano_final % 100 != 0) || (*pano_final % 400 == 0))
+                {
+                    ultimo_dia_do_mes = 29;
+                }
+                else
+                {
+                    ultimo_dia_do_mes = 28;
+                }
+        }
+        else if(*pmes_final == 4 || *pmes_final == 6 || *pmes_final == 9 || *pmes_final == 11)
+        {
+            ultimo_dia_do_mes = 30;
+        }
+        else
+        {
+            ultimo_dia_do_mes = 31;
+        }
+
         //preenchedo de acordo com o dia da semana do dia inicial dia inicial
         calendario[linha][coluna] = dia_inicial;
 
@@ -1476,7 +1497,15 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
             for(coluna = coluna; coluna < 7; coluna++)
             {
                 calendario[linha][coluna] = dia_inicial;
-                dia_inicial = dia_inicial + 1;
+                if(dia_inicial < ultimo_dia_do_mes)
+                {
+                    dia_inicial = dia_inicial + 1;
+                }
+                else
+                {
+                    coluna = 7;
+                    linha = 6;
+                }
             }
             coluna = 0;
         }
@@ -1484,54 +1513,54 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //Imprimindo matriz
         if(*pmes_final == 1)
         {
-            printf("\nJaneiro de %li\n", *pano_final);
+            printf("\n\tJANEIRO DE %li\n", *pano_final);
         }
         else if(*pmes_final == 2)
         {
-            printf("\nFevereiro de %li\n", *pano_final);
+            printf("\n\tFEVEREIRO DE %li\n", *pano_final);
         }
         else if(*pmes_final == 3)
         {
-            printf("Marco de %li\n", *pano_final);
+            printf("\n\tMARCO DE %li\n", *pano_final);
         }
         else if(*pmes_final == 4)
         {
-            printf("\nAbril de %li\n", *pano_final);
+            printf("\n\tABRIL DE %li\n", *pano_final);
         }
         else if(*pmes_final == 5)
         {
-            printf("\n\t\tMAIO de %li\n", *pano_final);
+            printf("\n\tMAIO DE %li\n", *pano_final);
         }
         else if(*pmes_final == 6)
         {
-            printf("\nJunho de %li\n", *pano_final);
+            printf("\n\tJUNHO DE %li\n", *pano_final);
         }
         else if(*pmes_final == 7)
         {
-            printf("\nJulho de %li\n", *pano_final);
+            printf("\n\tJULHO DE %li\n", *pano_final);
         }
         else if(*pmes_final == 8)
         {
-            printf("\nAgosto de %li\n", *pano_final);
+            printf("\n\tAGOSTO DE %li\n", *pano_final);
         }
         else if(*pmes_final == 9)
         {
-            printf("\nSetembro de %li\n", *pano_final);
+            printf("\n\tSETEMBRO DE %li\n", *pano_final);
         }
         else if(*pmes_final == 10)
         {
-            printf("\nOutubro de %li\n", *pano_final);
+            printf("\n\tOUTUBRO DE %li\n", *pano_final);
         }
         else if(*pmes_final == 11)
         {
-            printf("\nNovembro de %li\n", *pano_final);
+            printf("\n\tNOVEMBRO DE %li\n", *pano_final);
         }
         else
         {
-            printf("\nDezembro de %li\n", *pano_final);
+            printf("\n\tDEZEMBRO DE %li\n", *pano_final);
         }
 
-        printf("\nDOM   SEG   TER   QUA   QUI   SEX   SAB\n");
+        printf("\nDOM  SEG  TER  QUA  QUI  SEX  SAB\n");
         printf("\n");
         for(linha = 0; linha < 6; linha++)
         {
@@ -1539,15 +1568,15 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
             {
                 if(calendario[linha][coluna] == 0)
                 {
-                    printf("      ",calendario[linha][coluna]);
+                    printf("     ",calendario[linha][coluna]);
                 }
                 else if(calendario[linha][coluna] > 9)
                 {
-                    printf("%d    ",calendario[linha][coluna]);
+                    printf("%d   ",calendario[linha][coluna]);
                 }
                 else
                 {
-                    printf("%d     ",calendario[linha][coluna]);
+                    printf("%d    ",calendario[linha][coluna]);
                 }
             }
             printf("\n\n");
