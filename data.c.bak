@@ -1658,11 +1658,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         int ultimo_dia_do_mes;
 
 
-        //for()
-        //{
-
-        //}
-
         //A opcao 4 eh uma copia da opcao 2 com zero dias a calcular.
         dia_final_s = 1;
         mes_final_s = *pmes_final;
@@ -1674,19 +1669,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         opcaozero_s = 0;
 
         dia_da_semana = (calculadora_de_datas(&dia_inicial_s, &mes_inicial_s, &ano_inicial_s, &dia_final_s, &mes_final_s, &ano_final_s, &dias_a_calcular_s, &opcaozero_s) % 7);
-        printf("\ndia da semana == %li\n", dia_da_semana);
-
-        /*
-        Na data terca-feira 01/01/0001
-        Pegamos o dia da data e fazemos o seguinte calculo:
-        01 % 7 = 1 (resto da divisao entre 1 e 7 eh igual a 1)
-        Entao toda vez que o dia % 7 = 1 sera terca-feira.
-        Se dia % 7 = 2 sera quarta-feira.
-        Se dia % 7 = 3 sera quinta-feira.
-        Se dia % 7 = 6 sera domingo.
-        Assim por diante.
-        Isto vale para qualquer data.
-        */
 
         printf("\n");
         printf("*******************************************************************************");

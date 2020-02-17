@@ -46,7 +46,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
     /*if para pedir a opcao so 1 vez*/
     if(*popcao == -1)
     {
-        printf("Escolha a operacao que deseja realizar.\n\n");
+        printf("Escolha uma das opcoes.\n\n");
         printf("Digite 1 para calcular a diferenca entre duas datas.\n");
         printf("Digite 2 para adcionar dias apartir de uma data.\n");
         printf("Digite 3 para subtrair dias apartir de uma data.\n");
@@ -54,14 +54,14 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("Digite 5 para saber se um ano eh bissexto.\n");
         printf("Digite 6 para saber anos bissextos dentro de um intervalo.\n");
         printf("Digite 7 para ver o calendario.\n");
+        printf("Digite a opcao:\n");
         scanf("%d", &*popcao);
 
         //Validando opcao.
         while((*popcao < 1) || (*popcao > 7))
         {
             printf("\n\nOpcao invalida.\n\n");
-            printf("\nCalculadora de datas.\n");
-            printf("Escolha a operacao que deseja realizar.\n\n");
+            printf("Escolha uma das opcoes.\n\n");
             printf("Digite 1 para calcular a diferenca entre duas datas.\n");
             printf("Digite 2 para adcionar dias apartir de uma data.\n");
             printf("Digite 3 para subtrair dias apartir de uma data.\n");
@@ -69,6 +69,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             printf("Digite 5 para saber se um ano eh bissexto.\n");
             printf("Digite 6 para saber anos bissextos dentro de um intervalo.\n");
             printf("Digite 7 para ver o calendario.\n");
+            printf("Digite a opcao:\n");
             scanf("%d", &*popcao);
         }
     }
@@ -1832,6 +1833,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         }
 
         printf("*******************************************************************************\n");
-
+        return 0;
     }
 }
+
