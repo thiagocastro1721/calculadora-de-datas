@@ -1,10 +1,25 @@
 #include <stdio.h>
 int main ()
 {
-    printf("*******************************************************************************\n");
-    printf("                         CALCULADORA DE DATAS.\n");
-    printf("*******************************************************************************\n");
-    printf("\n");
+    printf("*****************************************************************************************\n");
+    printf("  ..|'''.|         '||                   '||               '||                           \n");
+    printf(".|'     '   ....    ||    ....  ... ...   ||   ....      .. ||    ...   ... ..   ....    \n");
+    printf("||         '' .||   ||  .|   ''  ||  ||   ||  '' .||   .'  '||  .|  '|.  ||' '' '' .||   \n");
+    printf("'|.      . .|' ||   ||  ||       ||  ||   ||  .|' ||   |.   ||  ||   ||  ||     .|' ||   \n");
+    printf(" ''|....'  '|..'|' .||.  '|...'  '|..'|. .||. '|..'|'  '|..'||.  '|..|' .||.    '|..'|'  \n");
+    printf("                                                                                         \n");
+    printf("                                         '||                                             \n");
+    printf("                                       .. ||    ....                                     \n");
+    printf("                                     .'  '||  .|...||                                    \n");
+    printf("                                     |.   ||  ||                                         \n");
+    printf("                                     '|..'||.  '|...'                                    \n");
+    printf("                                                                                         \n");
+    printf("                          '||''|.             .                                          \n");
+    printf("                           ||   ||   ....   .||.   ....    ....                          \n");
+    printf("                           ||    || '' .||   ||   '' .||  ||. '                          \n");
+    printf("                           ||    || .|' ||   ||   .|' ||  . '|..                         \n");
+    printf("                          .||...|'  '|..'|'  '|.' '|..'|' |'..|'                         \n");
+    printf("*****************************************************************************************\n");
 
     int repetir = 1;
     signed long dia_inicial = 0, mes_inicial = 0, ano_inicial = 0, dia_final = 0, mes_final = 0, ano_final = 0, dias_a_calcular = 0, opcao = -1;
@@ -114,7 +129,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         while(anos_a_calcular < 0)
         {
             printf("Erro. ANOS devem ser maiores ou iguais a zero.\n");
-            printf("Digite os ANOS a serem acrescentados.Em seguida digite os DIAS.\n");
+            printf("Digite os ANOS a serem acrescentados.Em seguida digite os MESES.\n");
             scanf("%d", &meses_a_calcular);
         }
         printf("Digite os MESES a serem acrescentados.Em seguida digite os DIAS.\n");
@@ -132,9 +147,32 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
 
         if(meses_a_calcular != 0 || anos_a_calcular != 0)
         {
-            //agora eh so somar os meses e os anos e ser feliz.
-            op2_mes_final = *pmes_inicial + meses_a_calcular;
+            //somando os anos
             op2_ano_final = *pano_inicial + anos_a_calcular;
+
+            //verificacao do dia 29/02 antes de somar os meses
+            if(*pdia_inicial == 29 && *pmes_inicial == 2)
+            {
+                //Se o ano nao for bissexto e o dia for 29 e o mes for 2, entao o dia muda o seu valor para 28.
+                if((op2_ano_final % 4 != 0) || (op2_ano_final % 100 == 0) && (op2_ano_final % 400 != 0))
+                {
+                    if(*pdia_inicial == 29 && *pmes_inicial == 2)
+                    {
+                        *pdia_inicial = 28;
+                        printf("\nentrou na condicao para 28. linha 923.\n");
+                    }
+                }
+                else
+                {
+                    if(*pdia_inicial == 28 && *pmes_inicial == 2)
+                    {
+                        *pdia_inicial = 29;
+                    }
+                }
+            }
+
+            //agora eh so somar os meses e ser feliz.
+            op2_mes_final = *pmes_inicial + meses_a_calcular;
 
             if(op2_mes_final >= 12)
             {
@@ -160,6 +198,9 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
                 }
             }
 
+
+
+
             *pdia_final = *pdia_inicial;
             *pmes_final = op2_mes_final;
             *pano_final = op2_ano_final;
@@ -179,6 +220,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         *pmes_final = 12;
         *pano_final = 9999999;
 
+        printf("\nmes_inicial %li\n", *pmes_inicial);
         //validar data e calcular a data inicial mais os dias.
         validar_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
     }
@@ -193,7 +235,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         while(anos_a_calcular < 0)
         {
             printf("Erro. ANOS devem ser maiores ou iguais a zero.\n");
-            printf("Digite os ANOS a serem acrescentados.Em seguida digite os DIAS.\n");
+            printf("Digite os ANOS a serem acrescentados.Em seguida digite os MESES.\n");
             scanf("%d", &meses_a_calcular);
         }
         printf("Digite os MESES que serao subtraidos.Em seguida digite os DIAS.\n");
@@ -1836,4 +1878,3 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         return 0;
     }
 }
-

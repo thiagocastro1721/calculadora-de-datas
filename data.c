@@ -1,10 +1,25 @@
 #include <stdio.h>
 int main ()
 {
-    printf("*******************************************************************************\n");
-    printf("                         CALCULADORA DE DATAS.\n");
-    printf("*******************************************************************************\n");
-    printf("\n");
+    printf("*****************************************************************************************\n");
+    printf("  ..|'''.|         '||                   '||               '||                           \n");
+    printf(".|'     '   ....    ||    ....  ... ...   ||   ....      .. ||    ...   ... ..   ....    \n");
+    printf("||         '' .||   ||  .|   ''  ||  ||   ||  '' .||   .'  '||  .|  '|.  ||' '' '' .||   \n");
+    printf("'|.      . .|' ||   ||  ||       ||  ||   ||  .|' ||   |.   ||  ||   ||  ||     .|' ||   \n");
+    printf(" ''|....'  '|..'|' .||.  '|...'  '|..'|. .||. '|..'|'  '|..'||.  '|..|' .||.    '|..'|'  \n");
+    printf("                                                                                         \n");
+    printf("                                         '||                                             \n");
+    printf("                                       .. ||    ....                                     \n");
+    printf("                                     .'  '||  .|...||                                    \n");
+    printf("                                     |.   ||  ||                                         \n");
+    printf("                                     '|..'||.  '|...'                                    \n");
+    printf("                                                                                         \n");
+    printf("                          '||''|.             .                                          \n");
+    printf("                           ||   ||   ....   .||.   ....    ....                          \n");
+    printf("                           ||    || '' .||   ||   '' .||  ||. '                          \n");
+    printf("                           ||    || .|' ||   ||   .|' ||  . '|..                         \n");
+    printf("                          .||...|'  '|..'|'  '|.' '|..'|' |'..|'                         \n");
+    printf("*****************************************************************************************\n");
 
     int repetir = 1;
     signed long dia_inicial = 0, mes_inicial = 0, ano_inicial = 0, dia_final = 0, mes_final = 0, ano_final = 0, dias_a_calcular = 0, opcao = -1;
@@ -21,7 +36,7 @@ int main ()
         captura_e_valida_dados_do_teclado(&dia_inicial, &mes_inicial, &ano_inicial, &dia_final, &mes_final, &ano_final, &dias_a_calcular, &opcao);
 
         printf("\nDeseja realizar outro calculo? ""1""(sim) ou ""0""(nao).\n");
-        scanf("%d", &repetir);
+        scanf("%i", &repetir);
         opcao = -1;
     }
 
@@ -55,7 +70,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("Digite 6 para saber anos bissextos dentro de um intervalo.\n");
         printf("Digite 7 para ver o calendario.\n");
         printf("Digite a opcao:\n");
-        scanf("%d", &*popcao);
+        scanf("%li", &*popcao);
 
         //Validando opcao.
         while((*popcao < 1) || (*popcao > 7))
@@ -70,7 +85,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             printf("Digite 6 para saber anos bissextos dentro de um intervalo.\n");
             printf("Digite 7 para ver o calendario.\n");
             printf("Digite a opcao:\n");
-            scanf("%d", &*popcao);
+            scanf("%li", &*popcao);
         }
     }
 
@@ -80,9 +95,9 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
          printf("\nCalcular diferencas entre duas datas.\n");
          printf("Digite as datas no formato dd/mm/aaaa exemplo 21/05/1989.\n\n");
          printf("Digite a data inicial.\n");
-         scanf("%d/%d/%d", &*pdia_inicial, &*pmes_inicial, &*pano_inicial);
+         scanf("%li/%li/%li", &*pdia_inicial, &*pmes_inicial, &*pano_inicial);
          printf("Digite a data final.\n");
-         scanf("%d/%d/%d", &*pdia_final, &*pmes_final, &*pano_final);
+         scanf("%li/%li/%li", &*pdia_final, &*pmes_final, &*pano_final);
 
          /*troca de posicao caso a primeira data seja maior que a segunda data*/
          if((*pano_inicial > *pano_final) || ((*pano_inicial == *pano_final) && (*pmes_inicial > *pmes_final)) || ((*pano_inicial == *pano_final) && (*pmes_inicial == *pmes_final) && (*pdia_inicial > *pdia_final)))
@@ -108,33 +123,56 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nAdicionar dias a uma data especifica.\n");
         printf("Digite a data no formato dd/mm/aaaa exemplo 21/05/1989.\n\n");
         printf("Digite a data inicial.\n");
-        scanf("%d/%d/%d", &*pdia_inicial, &*pmes_inicial, &*pano_inicial);
+        scanf("%li/%li/%li", &*pdia_inicial, &*pmes_inicial, &*pano_inicial);
         printf("Digite os ANOS a serem acrescentados. Em seguida digite os MESES.\n");
-        scanf("%d", &anos_a_calcular);
+        scanf("%li", &anos_a_calcular);
         while(anos_a_calcular < 0)
         {
             printf("Erro. ANOS devem ser maiores ou iguais a zero.\n");
-            printf("Digite os ANOS a serem acrescentados.Em seguida digite os DIAS.\n");
-            scanf("%d", &meses_a_calcular);
+            printf("Digite os ANOS a serem acrescentados.Em seguida digite os MESES.\n");
+            scanf("%li", &meses_a_calcular);
         }
         printf("Digite os MESES a serem acrescentados.Em seguida digite os DIAS.\n");
-        scanf("%d", &meses_a_calcular);
+        scanf("%li", &meses_a_calcular);
         while(meses_a_calcular < 0)
         {
             printf("Erro. MESES devem ser maiores ou iguais a zero.\n");
             printf("Digite os MESES a serem acrescentados.Em seguida digite os DIAS.\n");
-            scanf("%d", &meses_a_calcular);
+            scanf("%li", &meses_a_calcular);
         }
         printf("Digite os DIAS a serem acrescentados.\n");
-        scanf("%d", &*pdias_a_calcular);
+        scanf("%li", &*pdias_a_calcular);
 
         guarda_dias_calcular = *pdias_a_calcular;
 
         if(meses_a_calcular != 0 || anos_a_calcular != 0)
         {
-            //agora eh so somar os meses e os anos e ser feliz.
-            op2_mes_final = *pmes_inicial + meses_a_calcular;
+            //somando os anos
             op2_ano_final = *pano_inicial + anos_a_calcular;
+
+            //verificacao do dia 29/02 antes de somar os meses
+            if(*pdia_inicial == 29 && *pmes_inicial == 2)
+            {
+                //Se o ano nao for bissexto e o dia for 29 e o mes for 2, entao o dia muda o seu valor para 28.
+                if((op2_ano_final % 4 != 0) || (op2_ano_final % 100 == 0) && (op2_ano_final % 400 != 0))
+                {
+                    if(*pdia_inicial == 29 && *pmes_inicial == 2)
+                    {
+                        *pdia_inicial = 28;
+                        printf("\nentrou na condicao para 28. linha 923.\n");
+                    }
+                }
+                else
+                {
+                    if(*pdia_inicial == 28 && *pmes_inicial == 2)
+                    {
+                        *pdia_inicial = 29;
+                    }
+                }
+            }
+
+            //agora eh so somar os meses e ser feliz.
+            op2_mes_final = *pmes_inicial + meses_a_calcular;
 
             if(op2_mes_final >= 12)
             {
@@ -160,6 +198,9 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
                 }
             }
 
+
+
+
             *pdia_final = *pdia_inicial;
             *pmes_final = op2_mes_final;
             *pano_final = op2_ano_final;
@@ -179,6 +220,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         *pmes_final = 12;
         *pano_final = 9999999;
 
+        printf("\nmes_inicial %li\n", *pmes_inicial);
         //validar data e calcular a data inicial mais os dias.
         validar_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
     }
@@ -187,25 +229,25 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nSubtrair dias de uma data.\n");
         printf("Digite a data no formato dd/mm/aaaa exemplo 21/05/1989.\n\n");
         printf("Digite a data.\n");
-        scanf("%d/%d/%d", &*pdia_final, &*pmes_final, &*pano_final);
+        scanf("%li/%li/%li", &*pdia_final, &*pmes_final, &*pano_final);
         printf("Digite os ANOS que serao subtraidos.Em seguida digite os MESES.\n");
-        scanf("%d", &anos_a_calcular);
+        scanf("%li", &anos_a_calcular);
         while(anos_a_calcular < 0)
         {
             printf("Erro. ANOS devem ser maiores ou iguais a zero.\n");
-            printf("Digite os ANOS a serem acrescentados.Em seguida digite os DIAS.\n");
-            scanf("%d", &meses_a_calcular);
+            printf("Digite os ANOS a serem acrescentados.Em seguida digite os MESES.\n");
+            scanf("%li", &meses_a_calcular);
         }
         printf("Digite os MESES que serao subtraidos.Em seguida digite os DIAS.\n");
-        scanf("%d", &meses_a_calcular);
+        scanf("%li", &meses_a_calcular);
         while(meses_a_calcular < 0)
         {
             printf("Erro. MESES devem ser maiores ou iguais a zero.\n");
             printf("Digite os MESES a serem acrescentados.Em seguida digite os DIAS.\n");
-            scanf("%d", &meses_a_calcular);
+            scanf("%li", &meses_a_calcular);
         }
         printf("Digite os DIAS que serao subtraidos.\n");
-        scanf("%d", &*pdias_a_calcular);
+        scanf("%li", &*pdias_a_calcular);
 
         if(meses_a_calcular != 0 || anos_a_calcular != 0)
         {
@@ -254,7 +296,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nCalcular o dia da semana de uma data.\n");
         printf("Digite a data no formato dd/mm/aaaa exemplo 21/05/1989.\n\n");
         printf("Digite a data.\n");
-        scanf("%d/%d/%d", &*pdia_final, &*pmes_final, &*pano_final);
+        scanf("%li/%li/%li", &*pdia_final, &*pmes_final, &*pano_final);
 
         *pdia_inicial = 1;
         *pmes_inicial = 1;
@@ -269,7 +311,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nSaber se um ano eh bissexto.\n");
         printf("Digite o ano no formato aaaa exemplo 1989.\n\n");
         printf("Digite o ano.\n");
-        scanf("%d", &*pano_final);
+        scanf("%li", &*pano_final);
         *pdia_inicial = 01;
         *pmes_inicial = 01;
         *pano_inicial = 01;
@@ -283,10 +325,10 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nSaber anos bissextos dentro de um intervalo.\n");
         printf("Digite o ano inicial no formato aaaa exemplo 1989.\n\n");
         printf("Digite o ano.\n");
-        scanf("%d", &*pano_inicial);
+        scanf("%li", &*pano_inicial);
         printf("Digite o ano final no formato aaaa exemplo 1989.\n\n");
         printf("Digite o ano.\n");
-        scanf("%d", &*pano_final);
+        scanf("%li", &*pano_final);
 
         *pdia_inicial = 01;
         *pmes_inicial = 01;
@@ -300,10 +342,10 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
             printf("\nErro. Ano inicial maior que o ano final.\n\n");
             printf("\nDigite o ano inicial no formato aaaa exemplo 1989.\n\n");
             printf("Digite o ano.\n");
-            scanf("%d", &*pano_inicial);
+            scanf("%li", &*pano_inicial);
             printf("Digite o ano final no formato aaaa exemplo 1989.\n\n");
             printf("Digite o ano.\n");
-            scanf("%d", &*pano_final);
+            scanf("%li", &*pano_final);
 
             *pdia_inicial = 01;
             *pmes_inicial = 01;
@@ -321,7 +363,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("Digite o mes e o ano no formato mm/aaaa exemplo 05/1989.\n\n");
         printf("Digite o mes e o ano.\n");
         *pdia_inicial = 1;
-        scanf("%d/%d", &*pmes_final, &*pano_final);
+        scanf("%li/%li", &*pmes_final, &*pano_final);
 
         validar_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
 
@@ -1818,15 +1860,15 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
             {
                 if(calendario[linha][coluna] == 0)
                 {
-                    printf("     ",calendario[linha][coluna]);
+                    printf("     ");
                 }
                 else if(calendario[linha][coluna] > 9)
                 {
-                    printf("%d   ",calendario[linha][coluna]);
+                    printf("%i   ",calendario[linha][coluna]);
                 }
                 else
                 {
-                    printf("%d    ",calendario[linha][coluna]);
+                    printf("%i    ",calendario[linha][coluna]);
                 }
             }
             printf("\n\n");
@@ -1836,4 +1878,3 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         return 0;
     }
 }
-
