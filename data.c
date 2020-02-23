@@ -31,8 +31,6 @@ int main ()
 
     while(repetir == 1)
     {
-        //chamando funcoes
-        //printf("\nvalores da funcao %li, %li, %li, %li, %li, %li, %li, %li, \n", dia_inicial, mes_inicial, ano_inicial, dia_final, mes_final, ano_final, dias_a_calcular, opcao);
         captura_e_valida_dados_do_teclado(&dia_inicial, &mes_inicial, &ano_inicial, &dia_final, &mes_final, &ano_final, &dias_a_calcular, &opcao);
 
         printf("\nDeseja realizar outro calculo? ""1""(sim) ou ""0""(nao).\n");
@@ -46,7 +44,7 @@ int main ()
 void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *pmes_inicial, signed long *pano_inicial, signed long *pdia_final, signed long *pmes_final, signed long *pano_final, signed long *pdias_a_calcular, signed long *popcao)
 {
     signed long meses_a_calcular, anos_a_calcular;
-    //variaveis criada para o calculo parcial da diferenca em dias na opcao 2.
+    //variaveis criadas para o calculo parcial da diferenca em dias na opcao 2.
     signed long op2_mes_final, op2_ano_final, op3_mes_final,op3_ano_final, guarda_dias_calcular;
 
     /*Declarando funcao validar_datas*/
@@ -718,7 +716,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         else if (*popcao == 7)
         {
              //Os anos nao podem ser negativos e nem serem maiores que 9999999.
-            if((*pano_final < 1) || (*pano_final > 9999999))
+            if((*pano_final < 1) || (*pano_final > 999999))
             {
                 //printf("\nvalores da funcao %li, %li, %li, %li, %li, %li, %li, %li, \n", *pdia_inicial, *pmes_inicial, *pano_inicial, *pdia_final, *pmes_final, *pano_final, *pdias_a_calcular, *popcao);
                 printf("\nData invalida. Verifique os anos.\n\n");
@@ -761,15 +759,13 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
     signed long dia_inicial_md, mes_inicial_md, ano_inicial_md, dia_final_md, mes_final_md, ano_final_md, dias_a_calcular_md, opcao_md;
     signed long contanobissextos = 0;
 
-    // primeiro definir uma funcao que calcula void dia_da_semana();
-    /*Fazer verificacao de entrada de dados*/
-
     ano = *pano_inicial;
     primeiro_dia_do_mes = *pdia_inicial;
 
     guarda_dia_inicial = *pdia_inicial;
     guarda_mes_inicial = *pmes_inicial;
 
+    //estrutura for que conta os dias
     for(i = ano; i <= *pano_final; i++)
     {
         if(i != *pano_final)
@@ -1277,8 +1273,6 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //por enquanto vamos focar na diferenca em meses
         //lembrando que a diferenca nunca sera maior que 12
 
-
-
         if((guarda_dia_inicial == 29 && *pdia_final == 28) && (guarda_mes_inicial == *pmes_final) && (*pmes_final == 2))
         {
             quant_meses = *pmes_final - guarda_mes_inicial;
@@ -1517,7 +1511,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
     }
      else if (*popcao == 3)
     {
-        //maiores_dias, diferenca em dias entre 01/01/0001 e a data digitada pelo usuario.
+        //maiores_dias eh a diferenca em dias entre 01/01/0001 e a data digitada pelo usuario.
         //variaveis alteradas com final _md
         dia_inicial_md = 1;
         mes_inicial_md = 1;
@@ -1530,7 +1524,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
 
         maiores_dias = calculadora_de_datas(&dia_inicial_md, &mes_inicial_md, &ano_inicial_md, &dia_final_md, &mes_final_md, &ano_final_md, &dias_a_calcular_md, &opcao_md);
 
-        /*menores_dias, diferenca em dias entre a data x (data procurada) e a data digitada pelo usuario.*/
+        /*menores_dias eh a diferenca em dias entre a data x (data procurada) e a data digitada pelo usuario.*/
         /*essa diferenca eh informada diretamente pelo usuario quando o mesmo informa os dias a subtrair.*/
         menores_dias = *pdias_a_calcular;
 
@@ -1700,6 +1694,11 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
     }
     else if (*popcao == 7)
     {
+        //Primeiro calcular qual vai ser o primeiro dia da semana do mes digitado
+        //Depois preeche a matriz com os dias acrescentando 1 a cada dia.
+        //Parar de acrescentar ate chegar o limite de dias do mes.
+        //Imprimir a matriz calendario.
+
         int calendario[6][7] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         int linha, coluna;
         int dia_inicial = 1;
@@ -1725,49 +1724,51 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         //dia da semana
         if(dia_da_semana == 0)
         {
-            //printf("\nSegunda-feira ");
+            //Segunda-feira
             linha = 1;
             coluna = 1;
         }
         else if(dia_da_semana == 1)
         {
-            //printf("\nTerca-feira ");
+            //Terca-feira
             linha = 1;
             coluna = 2;
         }
         else if(dia_da_semana == 2)
         {
-            //printf("\nQuarta-feira ");
+            //Quarta-feira
             linha = 1;
             coluna = 3;
         }
         else if(dia_da_semana == 3)
         {
-            //printf("\nQuinta-feira ");
+            //Quinta-feira
             linha = 1;
             coluna = 4;
         }
         else if(dia_da_semana == 4)
         {
-            //printf("\nSexta-feira ");
+            //Sexta-feira
             linha = 1;
             coluna = 5;
         }
         else if(dia_da_semana == 5)
         {
-            //printf("\nSabado ");
+            //Sabado
             linha = 1;
             coluna = 6;
         }
         else if(dia_da_semana == 6)
         {
-            //printf("\nDomingo ");
+            //Domingo
             linha = 1;
             coluna = 0;
         }
 
+        //limite de dias do mes
         if(*pmes_final == 2)
         {
+                //Se o mes for fevereiro e o ano for bissexto, entao o limite de dias eh 29. Se o mes for fevereiro o ano nao for bissexto, entao o limite de dias eh 28.
                 if ((*pano_final % 4 == 0) && (*pano_final % 100 != 0) || (*pano_final % 400 == 0))
                 {
                     ultimo_dia_do_mes = 29;
@@ -1779,6 +1780,7 @@ int calculadora_de_datas(signed long *pdia_inicial, signed long *pmes_inicial, s
         }
         else if(*pmes_final == 4 || *pmes_final == 6 || *pmes_final == 9 || *pmes_final == 11)
         {
+            //Se o mes for Abril ou Junho ou Setembro Ou Novembro, entao o limite de dias do mes eh 30. Se nao, 31.
             ultimo_dia_do_mes = 30;
         }
         else
