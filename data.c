@@ -362,7 +362,12 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         printf("\nMostrar o calendario.\n");
         printf("Digite o mes e o ano no formato mm/aaaa exemplo 05/1989.\n\n");
         printf("Digite o mes e o ano.\n");
+
         *pdia_inicial = 1;
+        *pmes_inicial = 1;
+        *pano_inicial = 1;
+        *pdia_final = 1;
+
         scanf("%li/%li", &*pmes_final, &*pano_final);
 
         validar_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
