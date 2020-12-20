@@ -218,7 +218,7 @@ void captura_e_valida_dados_do_teclado(signed long *pdia_inicial, signed long *p
         *pmes_final = 12;
         *pano_final = 9999999;
 
-        printf("\nmes_inicial %li\n", *pmes_inicial);
+
         //validar data e calcular a data inicial mais os dias.
         validar_datas(&*pdia_inicial, &*pmes_inicial, &*pano_inicial, &*pdia_final, &*pmes_final, &*pano_final, &*pdias_a_calcular, &*popcao);
     }
